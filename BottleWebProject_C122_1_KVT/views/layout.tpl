@@ -6,30 +6,17 @@
     <title>{{ title }} - My Bottle Application</title>
     <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
+    <link rel="stylesheet" type="text/css" href="/static/content/styles.css" />
     <script src="/static/scripts/modernizr-2.6.2.js"></script>
 </head>
 
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="/" class="navbar-brand">Application name</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="/home">Home</a></li>
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/bfs">BFS</a></li>
-                    <li><a href="/dfs">DFS</a></li>
-                    <li><a href="/kruskal">KRUSKAL</a></li>
-                </ul>
-            </div>
-        </div>
+    <div class="topnav">
+        <a href="/home">Главная</a>
+        <a href="/bfs">Поиск &laquo;в ширину&raquo;</a>
+        <a href="/dfs">Поиск &laquo;в глубину&raquo;</a>
+        <a href="/kruskal">Алгоритм Краскала</a>
+        <a href="/about">Авторы</a>
     </div>
 
     <div class="container body-content">
@@ -39,6 +26,22 @@
             <p>&copy; {{ year }} - My Bottle Application</p>
         </footer>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var currentUrl = window.location.pathname;
+            var links = document.querySelectorAll('div a');
+            links.forEach(function(link) {
+                if (link.getAttribute('href') === currentUrl) {
+                    link.classList.add('active');
+                }
+            });
+
+            if (!Array.from(links).some(link => link.classList.contains('active'))) {
+                document.querySelector('.topnav a[href="/home"]').classList.add('active');
+            }
+        });
+    </script>
 
     <script src="/static/scripts/jquery-1.10.2.js"></script>
     <script src="/static/scripts/bootstrap.js"></script>

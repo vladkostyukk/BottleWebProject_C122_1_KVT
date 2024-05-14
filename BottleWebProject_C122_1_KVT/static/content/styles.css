@@ -1,0 +1,33 @@
+body {
+    padding: 0px;
+}
+
+/* Добавить черный цвет фона для верхней навигации */
+.topnav {
+    background-color: #3c3b3b;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+/* Стиль ссылок внутри панели навигации */
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    padding: 16px 36px;
+    text-decoration: none;
+    font-size: 18px;
+    font-family: Apple Chancery, cursive;
+}
+
+/* Изменение цвета ссылок при наведении курсора */
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Добавить цвет для активной/текущей ссылки */
+.topnav a.active {
+    background-color: #006400;
+    color: white;
+}
