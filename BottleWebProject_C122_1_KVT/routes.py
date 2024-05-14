@@ -19,7 +19,7 @@ def home():
 def about():
     """Renders the contact page."""
     return dict(
-        title='Contact',
+        title='Авторы',
         message='Your contact page.',
         year=datetime.now().year
     )

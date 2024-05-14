@@ -27,7 +27,18 @@ body {
 }
 
 /* Добавить цвет для активной/текущей ссылки */
-.topnav a.active {
-    background-color: #006400;
-    color: white;
+    .topnav a.active {
+        background-color: #3A4863;
+        color: white;
+    }
+
+.index-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url("../../static/images/index_background.jpg");
+    background-size: cover;
+    left: 0;
+    top: 0;
+    z-index: -1;
 }
