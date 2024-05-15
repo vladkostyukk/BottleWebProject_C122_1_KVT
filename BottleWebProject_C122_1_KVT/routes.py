@@ -9,7 +9,6 @@ from datetime import datetime
 @route('/home')
 @view('index')
 def home():
-    """Renders the home page."""
     return dict(
         year=datetime.now().year
     )
@@ -17,7 +16,6 @@ def home():
 @route('/about')
 @view('about')
 def about():
-    """Renders the contact page."""
     return dict(
         title='Авторы',
         message='Your contact page.',
@@ -27,7 +25,10 @@ def about():
 @route('/bfs')
 @view('bfs')
 def bfs():
-    return
+    return dict(
+        title='Поиск "в ширину"',
+        year=datetime.now().year
+    )
 
 
 @route('/dfs')

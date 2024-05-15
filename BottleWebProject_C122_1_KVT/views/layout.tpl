@@ -13,9 +13,14 @@
 <body>
     <div class="topnav">
         <a href="/home">Главная</a>
-        <a href="/bfs">Поиск &laquo;в ширину&raquo;</a>
-        <a href="/dfs">Поиск &laquo;в глубину&raquo;</a>
-        <a href="/kruskal">Алгоритм Краскала</a>
+        <div class="dropdown">
+            <button class="dropbtn">Алгоритмы</button>
+            <div class="dropdown-content">
+                <a href="/bfs">Поиск &laquo;в ширину&raquo;</a>
+                <a href="/dfs">Поиск &laquo;в глубину&raquo;</a>
+                <a href="/kruskal">Алгоритм Краскала</a>
+            </div>
+        </div>
         <a href="/about">Авторы</a>
     </div>
 
@@ -23,24 +28,35 @@
         {{!base}}
         <hr />
         <footer>
-            <p>&copy; {{ year }} - My Bottle Application</p>
+            <p>&copy; {{ year }} - BottleWebProject_C122_1_KVT</p>
         </footer>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var currentUrl = window.location.pathname;
-            var links = document.querySelectorAll('div a');
-            links.forEach(function(link) {
+             var currentUrl = window.location.pathname;
+             var links_div = document.querySelectorAll('div a');
+
+             links_div.forEach(function(link) {
+                 if (link.getAttribute('href') === currentUrl) {
+                     link.classList.add('active');
+                 }
+             });
+
+             var links_drop = document.querySelectorAll('.dropdown-content a');
+
+             links_drop.forEach(function(link) {
                 if (link.getAttribute('href') === currentUrl) {
-                    link.classList.add('active');
+                    document.querySelector('.dropdown .dropbtn').classList.add('active');
                 }
             });
 
-            if (!Array.from(links).some(link => link.classList.contains('active'))) {
-                document.querySelector('.topnav a[href="/home"]').classList.add('active');
-            }
-        });
+
+             if (!Array.from(links_div).some(link => link.classList.contains('active'))) {
+                 document.querySelector('.topnav a[href="/home"]').classList.add('active');
+             }
+         });
+            
     </script>
 
     <script src="/static/scripts/jquery-1.10.2.js"></script>
