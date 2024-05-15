@@ -26,10 +26,10 @@ body {
 }
 
 /* Добавить цвет для активной/текущей ссылки */
-.topnav > a.active {
-    background-color: #3A4863;
-    color: white;
-}
+    .topnav > a.active {
+        background-color: #8CC63E;
+        color: white;
+    }
 
 .dropdown {
     position: relative;
@@ -44,10 +44,10 @@ body {
     cursor: pointer;
 }
 
-.dropbtn.active {
-    background-color: #3A4863;
-    color: white;
-}
+    .dropbtn.active {
+        background-color: #8CC63E;
+        color: white;
+    }
 
 .dropdown-content {
     display: none;
@@ -87,10 +87,12 @@ body {
 .bfs_h1 {
     color: black;
     text-align: center;
-    margin-top: 40px
+    margin-top: 40px;
+    font-family: Apple Chancery, cursive;
+    font-weight: bold;
 }
 
-.bfs_div {
+.bfs_div_theory {
     display: flex;
     align-items: center;
     margin-top: 40px;
@@ -98,14 +100,92 @@ body {
     margin-left: -100px;
 }
 
-.bfs_div p {
+.bfs_div_theory p {
     font-size: 18px;
     font-family: Verdana, sans-serif;
     color: black;
 }
 
-.bfs_div img {
+.bfs_div_theory img {
     max-width: 100%;
     max-height: 100%;
     width: 600px;
+}
+
+.bfs_div_practice {
+    margin-top: 0px;
+    margin-right: -100px;
+    margin-left: -100px;
+}
+
+.bfs_div_practice h3 {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 18px;
+    font-family: Verdana, sans-serif;
+    color: black;
+}
+
+.form-group {
+    position: relative;
+    margin-top: 20px;
+}
+
+.form-group input{
+    width: 60px;
+}
+
+.input_bfs {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.input_bfs:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.input_bfs:focus + label {
+    top: 0;
+    font-size: 12px;
+    color: #3498db;
+}
+
+#matrix_bfs input {
+    width: 50px;
+}
+
+.floating-button {
+    text-decoration: none;
+    display: inline-block;
+    width: 140px;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 45px;
+    margin: 15px 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 3px;
+    font-weight: 600;
+    color: white;
+    background: #3c3b3b;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+    transition: .3s;
+}
+
+.floating-button:hover {
+    background: #8CC63F;
+    box-shadow: 0 15px 20px rgba(140, 198, 63, .4);
+    color: white;
+}
+
+#graph {
+    height: 400px;
 }
