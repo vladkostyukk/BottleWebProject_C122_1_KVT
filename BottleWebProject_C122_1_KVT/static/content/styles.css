@@ -26,10 +26,10 @@ body {
 }
 
 /* Добавить цвет для активной/текущей ссылки */
-    .topnav > a.active {
-        background-color: #8CC63E;
-        color: white;
-    }
+.topnav > a.active {
+    background-color: #71a130;
+    color: white;
+}
 
 .dropdown {
     position: relative;
@@ -44,10 +44,10 @@ body {
     cursor: pointer;
 }
 
-    .dropbtn.active {
-        background-color: #8CC63E;
-        color: white;
-    }
+.dropbtn.active {
+    background-color: #71a130;
+    color: white;
+}
 
 .dropdown-content {
     display: none;
@@ -84,20 +84,34 @@ body {
     z-index: -1;
 }
 
-.bfs_h1 {
+.bfs-background {
+    background-color: #D3D3D3;
+    left: 0;
+    position: absolute;
+}
+
+.bfs-block-theory {
+    background-color: white;
+    margin-left: 70px;
+    margin-right: 70px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    padding: 40px;
+    border: 2px solid #3c3b3b;
+}
+
+.bfs-block-theory h1 {
     color: black;
     text-align: center;
-    margin-top: 40px;
-    font-family: Apple Chancery, cursive;
     font-weight: bold;
+    margin-top: -10px;
 }
 
 .bfs_div_theory {
     display: flex;
     align-items: center;
     margin-top: 40px;
-    margin-right: -100px;
-    margin-left: -100px;
 }
 
 .bfs_div_theory p {
@@ -112,13 +126,27 @@ body {
     width: 600px;
 }
 
-.bfs_div_practice {
-    margin-top: 0px;
-    margin-right: -100px;
-    margin-left: -100px;
+.bfs-block-practice {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 30px;
+    background-color: white;
+    margin-left: 70px;
+    margin-right: 70px;
+    margin-top: 0;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    padding: 40px;
+    border: 2px solid #3c3b3b;
 }
 
-.bfs_div_practice h3 {
+.bfs-block-practice h2 {
+    color: black;
+    font-weight: bold;
+}
+
+.bfs-block-practice h3 {
     display: block;
     margin-bottom: 5px;
     color: #333;
@@ -156,6 +184,18 @@ body {
     color: #3498db;
 }
 
+.bfs-td {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: Verdana, sans-serif;
+}
+
+#matrix_bfs {
+    margin-top: 10px;
+    width: 550px;
+}
+
 #matrix_bfs input {
     width: 50px;
 }
@@ -181,11 +221,13 @@ body {
 }
 
 .floating-button:hover {
-    background: #8CC63F;
+    background: #71a130;
     box-shadow: 0 15px 20px rgba(140, 198, 63, .4);
     color: white;
+    text-decoration: none;
 }
 
 #graph {
+    width: 400px;
     height: 400px;
 }
