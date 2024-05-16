@@ -21,7 +21,7 @@ function buildGraph() {
             // Проверка наличия введенного веса и его отличия от нуля
             if (weight !== "" && parseFloat(weight) !== 0) {
                 // Добавление ребра с весом и числом обозначающим его вес
-                graphData.edges.push({ from: i, to: j, label: weight, title: String(weight), smooth: { type: 'curvedCW', roundness: 0.2 } });
+                graphData.edges.push({ from: i, to: j, label: weight, title: String(weight), smooth: { enabled: false }, arrows: { to: { enabled: false } } });
             }
         }
     }
@@ -56,13 +56,8 @@ function buildGraph() {
             borderWidthSelected: 2 // Увеличиваем ширину границы выбранных узлов
         },
         edges: {
-            smooth: {
-                type: 'curvedCW', // Изогнутые линии для избегания слияния
-                roundness: 0.2
-            },
-            arrows: {
-                to: { enabled: false } // Отключаем стрелки направления
-            },
+            smooth: false, // Прямые линии без изгибов
+            arrows: { to: { enabled: false } }, // Отключаем стрелки направления
             font: {
                 align: 'middle',
                 size: 14, // Уменьшаем размер шрифта для меток рёбер, чтобы уменьшить перекрытие

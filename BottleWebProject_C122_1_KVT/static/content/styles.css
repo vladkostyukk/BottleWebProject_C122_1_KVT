@@ -12,15 +12,16 @@ body {
     color: black;
     background: #D3D3D3;
     margin: 100px 250px 0px 250px;
-    position: absolute;
     left: 0;
 }
 
 .header_kruskal h1 {
     text-align: center;
     color: black;
+    position: relative;
     font-weight: bold;
     margin-top: -10px;
+    z-index: 1;
 }
 
 .tablist {
@@ -131,15 +132,19 @@ img {
     font-size: 18px;
     font-family: Verdana, sans-serif;
     color: black;
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     background: url("/static/images/index-background.jpg");
     background-size: cover;
     left: 0;
     top: 0;
+    overflow-y: auto;
     z-index: -1;
 }
+
+
+
 
 .header_about h1 {
     text-align: center;
@@ -243,6 +248,7 @@ img {
     position: relative;
     top: -80px;
     left: 10px;
+    z-index: 0;
 }
 
 .custom-figcaption {
