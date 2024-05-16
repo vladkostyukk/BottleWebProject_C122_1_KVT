@@ -317,4 +317,8 @@ footer {
 #graph {
     width: 500px;
     height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    scroll-margin-top: 20vh;
 }

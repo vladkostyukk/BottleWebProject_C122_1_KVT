@@ -26,51 +26,12 @@
 
     <div id="matrix_bfs"></div>
 
-    <a class="floating-button" onclick="buildGraph()">Построить</a>
+    <a class="floating-button" onclick="buildGraph(); location.href='#graph';">Построить</a>
     <a class="floating-button" style="width: 170px;">Сгенерировать</a>
     <a class="floating-button">Из файла</a>
 
     <div id="graph"></div>
 
+    <svg width="400" height="400"></svg>
     <a class="floating-button">Из файла</a>
 </div>
-
-<script>
-    let network;
-
-    function bfsTraversal() {
-        if (!network) {
-            alert('Сначала постройте граф.');
-            return;
-        }
-        
-        const startNode = 0;
-        const visited = new Array(network.getNodeCount()).fill(false);
-        const queue = [startNode];
-        
-        visited[startNode] = true;
-        network.selectNodes([startNode]);
-        
-        const timer = setInterval(() => {
-            if (queue.length === 0) {
-                clearInterval(timer);
-                return;
-            }
-            
-            const currentNode = queue.shift();
-            network.selectNodes([currentNode]);
-            
-            const neighbors = network.getConnectedNodes(currentNode);  // Get connected nodes
-            
-            neighbors.forEach(neighbor => {
-                if (!visited[neighbor]) {
-                    visited[neighbor] = true;
-                    queue.push(neighbor);
-                    network.selectNodes([neighbor]);
-                    network.focus(neighbor);
-                }
-            });
-        }, 1000);
-    }
-
-</script>
