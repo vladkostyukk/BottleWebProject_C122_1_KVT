@@ -33,7 +33,7 @@ footer {
 /* Стиль ссылок внутри панели навигации */
 .topnav a {
     float: left;
-    color: #f2f2f2;
+    color: white;
     padding: 16px 36px;
     text-decoration: none;
 }
@@ -63,6 +63,11 @@ footer {
     cursor: pointer;
 }
 
+.dropbtn:hover {
+    background-color: #ddd;
+    color: black;
+}
+
 .dropbtn.active {
     background-color: #71a130;
     color: white;
@@ -73,7 +78,7 @@ footer {
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
@@ -105,7 +110,7 @@ footer {
 
 .index-text-div {
     background-color: white;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
     padding: 40px;
     border: 2px solid #3c3b3b;
     border-radius: 10px;
@@ -138,7 +143,7 @@ footer {
 .index-card {
     align-content: center;
     background-color: white;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
     transition: 0.3s;
     width: 40%;
     border-radius: 5px;
@@ -149,6 +154,9 @@ footer {
     text-align: center;
     color: black;
     cursor: pointer;
+    background: linear-gradient(to right, white 50%, #8FCD3C 50%);
+    background-size: 200% 100%;
+    transition: background-position 0.2s;
 }
 
 .index-card h2 {
@@ -160,9 +168,10 @@ footer {
     font-family: Verdana, sans-serif;
 }
 
-.index-card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
-}
+    .index-card:hover {
+        background-position: -100%;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.8);
+    }
 
 .bfs-background {
     background-color: #D3D3D3;
@@ -179,7 +188,7 @@ footer {
     border-radius: 10px;
     padding: 40px;
     border: 2px solid #3c3b3b;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
 }
 
 .bfs-block-theory h1 {
@@ -217,7 +226,7 @@ footer {
     border-radius: 10px;
     padding: 40px;
     border: 2px solid #3c3b3b;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
 }
 
 .bfs-block-practice h2 {
