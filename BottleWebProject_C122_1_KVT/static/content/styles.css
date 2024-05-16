@@ -2,19 +2,25 @@
     box-sizing: border-box;
 }
 
+body {
+    background: #D3D3D3;
+}
+
 .body_kruskal {
     font-size: 18px;
     font-family: Verdana, sans-serif;
     color: black;
     background: #D3D3D3;
     margin: 100px 250px 0px 250px;
+    position: absolute;
+    left: 0;
 }
 
 .header_kruskal h1 {
     text-align: center;
     color: black;
     font-weight: bold;
-    margin-top: 50px;
+    margin-top: -10px;
 }
 
 .tablist {
@@ -53,6 +59,7 @@ input[type=radio]:checked + .tablist__label {
     flex: 0 1 100%;
     border: 2px solid #000;
     margin-top: -1px;
+    width: 650px;
 }
 
 .tablist__panel {
@@ -235,7 +242,7 @@ img {
 .custom-image-position {
     position: relative;
     top: -80px;
-    left: 40px;
+    left: 10px;
 }
 
 .custom-figcaption {
