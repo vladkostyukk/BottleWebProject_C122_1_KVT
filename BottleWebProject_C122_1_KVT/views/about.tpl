@@ -1,15 +1,6 @@
 % rebase('layout.tpl', title=title, year=year)
 
-<!DOCTYPE html>
-<html lang="ru">
-
-<head> 
-  <meta charset="UTF-8">
-  <title>О нас</title>
-  <link rel="stylesheet" type="text/css" href="/static/content/style.css">
-</head>
-
-<body class="body_about">
+<div class="body_about">
     <div class="header header_about">
          <h1>О нас</h1>
          <p><center>Студенты ФСПО ГУАП группа С122</center></p>
@@ -40,5 +31,5 @@
           </div>
         </div>
     </div>
-</body>
-</html>
+</div>
+

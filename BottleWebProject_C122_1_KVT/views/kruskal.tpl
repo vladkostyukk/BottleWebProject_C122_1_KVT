@@ -1,24 +1,6 @@
 % rebase('layout.tpl', title=title, year=year)
 
-<!DOCTYPE html>
-<html lang="ru">
-
-<head> 
-  <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="/static/content/style.css">
-  <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
-  <meta name="apple-mobile-web-app-title" content="CodePen">
-  <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
-  <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
-  <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
-  <link rel="canonical" href="https://codepen.io/pojoga84/pen/MLevKR">
-  <script>window.console = window.console || function(t) {};</script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet" type="text/css"/>
-
-</head>
-
-<body class="body_kruskal">
+<div class="body_kruskal">
     <div class="header_kruskal">
          <h1>Алгоритм Краскала</h1>
     </div>
@@ -106,7 +88,7 @@
             <form action="/home" method="post">
             <p>Количество вершин графа:</p>
             <p>
-                <input type="number" id="vertices-input" name="vertexCount" min="1" max="10" value="3" onchange="generateMatrix()" class="rounded-input">
+                <input type="number" id="vertices-input" name="vertexCount" min="1" max="10" value="3" onchange="generateMatrix()" class="rounded-input" oninput="this.value = Math.min(Math.max(this.value, 1), 10)">
             </p>
             <p>Матрица весов рёбер:</p>
             <div id="matrix_kruskal"></div>
@@ -121,9 +103,4 @@
         </article>
         </div>
     </div>
-    <script src="\static\scripts\matrix_kruskal.js"></script>
-    <script src="\static\scripts\switch_calc.js"></script>
-    <script src="\static\scripts\create_graph_kruskal.js"></script>
-</body>
-</html>
-
+    </div>
