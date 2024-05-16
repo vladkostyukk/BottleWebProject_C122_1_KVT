@@ -24,11 +24,11 @@
         <a href="/about">Авторы</a>
     </div>
 
-    <div class="container body-content">
+    <div>
         {{!base}}
         <hr />
         <footer>
-            <p>&copy; {{ year }} - BottleWebProject_C122_1_KVT</p>
+            <p>&copy; {{ year }} – BottleWebProject_C122_1_KVT</p>
         </footer>
     </div>
 
@@ -62,6 +62,8 @@
     <script src="/static/scripts/jquery-1.10.2.js"></script>
     <script src="/static/scripts/bootstrap.js"></script>
     <script src="/static/scripts/respond.js"></script>
+    <script src="/static/scripts/bfs.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 
 </body>
 </html>
