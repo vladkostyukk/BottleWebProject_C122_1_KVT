@@ -18,7 +18,7 @@
     <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
     <Name>BottleWebProject_C122_1_KVT</Name>
     <RootNamespace>BottleWebProject_C122_1_KVT</RootNamespace>
-    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|env1|$(MSBuildProjectFullPath)</InterpreterId>
     <TestFramework>unittest</TestFramework>
     <UnitTestPattern>test*.py</UnitTestPattern>
     <UnitTestRootDirectory>.</UnitTestRootDirectory>
@@ -33,12 +33,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.py" />
+    <Compile Include="kruskal.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="routes.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="static\" />
     <Folder Include="static\content\" />
     <Folder Include="static\fonts\" />
+    <Folder Include="static\images\" />
     <Folder Include="static\scripts\" />
     <Folder Include="views\" />
   </ItemGroup>
@@ -47,12 +51,25 @@
     <Content Include="static\content\bootstrap.css" />
     <Content Include="static\content\bootstrap.min.css" />
     <Content Include="static\content\site.css" />
+    <Content Include="static\content\style.css" />
     <Content Include="static\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="static\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="static\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="static\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="static\images\card1.jpg" />
+    <Content Include="static\images\card2.jpg" />
+    <Content Include="static\images\card3.jpg" />
+    <Content Include="static\images\graph.png" />
+    <Content Include="static\images\graph1.png" />
+    <Content Include="static\images\graph2.png" />
+    <Content Include="static\images\index-background.jpg" />
+    <Content Include="static\images\list_sets.png" />
+    <Content Include="static\images\matrix.png" />
+    <Content Include="static\images\table.png" />
+    <Content Include="static\images\table1.png" />
     <Content Include="static\scripts\bootstrap.js" />
     <Content Include="static\scripts\bootstrap.min.js" />
+    <Content Include="static\scripts\create_graph_kruskal.js" />
     <Content Include="static\scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="static\scripts\jquery-1.10.2.js" />
     <Content Include="static\scripts\jquery-1.10.2.min.js" />
@@ -62,9 +79,11 @@
     <Content Include="static\scripts\jquery.validate.min.js" />
     <Content Include="static\scripts\jquery.validate.unobtrusive.js" />
     <Content Include="static\scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="static\scripts\matrix_kruskal.js" />
     <Content Include="static\scripts\modernizr-2.6.2.js" />
     <Content Include="static\scripts\respond.js" />
     <Content Include="static\scripts\respond.min.js" />
+    <Content Include="static\scripts\switch_calc.js" />
     <Content Include="static\scripts\_references.js" />
     <Content Include="views\bfs.tpl">
       <SubType>Code</SubType>
