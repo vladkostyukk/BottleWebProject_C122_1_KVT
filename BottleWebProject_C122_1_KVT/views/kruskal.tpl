@@ -1,11 +1,11 @@
 % rebase('layout.tpl', title=title, year=year)
 
 <div class="body_kruskal">
-    <div class="header_kruskal">
-         <h1>Алгоритм Краскала</h1>
-    </div>
 
-    <img src="/static/images/graph.png" alt="Graph" class="custom-image-position">
+    <div class="header_kruskal">
+        <img src="/static/images/graph.png" alt="Graph">
+        <h1>Алгоритм Краскала</h1>
+    </div>
 
   <div class="tablist">
     <input class="tablist__radio" type="radio" id="tab-1" name="tab" checked>

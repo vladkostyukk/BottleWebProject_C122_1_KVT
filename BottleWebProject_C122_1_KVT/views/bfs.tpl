@@ -29,9 +29,6 @@
     <a class="floating-button" onclick="buildGraphBFS(); location.href='#graph';">Построить</a>
     <a class="floating-button" style="width: 170px;">Сгенерировать</a>
     <a class="floating-button">Из файла</a>
-
-    <div id="graph"></div>
-
-    <svg width="400" height="400"></svg>
-    <a class="floating-button">Из файла</a>
+    
+    <!-- <div id="graph"></div> -->
 </div>

@@ -340,24 +340,32 @@ footer {
     font-family: Verdana, sans-serif;
     color: black;
     background: #D3D3D3;
-    margin: 100px 250px 0px 250px;
+    margin: 15px 250px 0px 250px;
     left: 0;
 }
 
-.header_kruskal h1 {
-    text-align: center;
-    color: black;
-    position: relative;
-    font-weight: bold;
-    margin-top: -10px;
-    z-index: 1;
+.header_kruskal {
+    display: flex;
+    align-items: center;
 }
+
+    .header_kruskal h1 {
+        color: black;
+        font-weight: bold;
+        margin-left: 10px;
+    }
+
+    .header_kruskal img {
+        max-width: 100%;
+        max-height: 100%;
+        width: 300px;
+    }
 
 .tablist {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-top: -60px;
+    margin-top: 15px;
 }
 
 .tablist__radio {
@@ -574,13 +582,7 @@ img {
     margin-top: 5px;
 }
 
-.custom-image-position {
-    position: relative;
-    top: -80px;
-    left: 10px;
-    z-index: 0;
-    transform: translateX(-5%);
-}
+
 
 .custom-figcaption {
     text-align: left;

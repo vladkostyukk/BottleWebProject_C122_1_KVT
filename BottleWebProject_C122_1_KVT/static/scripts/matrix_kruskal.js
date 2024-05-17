@@ -1,4 +1,4 @@
-function generateMatrix() {
+function generateMatrixKruskal() {
     const n = parseInt(document.getElementById('vertices-input').value);
     let matrix = '<table>';
 
@@ -43,7 +43,3 @@ function generateMatrix() {
         });
     });
 }
-
-document.addEventListener('DOMContentLoaded', function () {
-    generateMatrix(); // Создаем матрицу при загрузке страницы
-});

@@ -2,6 +2,10 @@ window.onload = function () {
     if (window.location.href.includes("/bfs")) {
         generateMatrixBFS();
     }
+
+    if (window.location.href.includes("/kruskal")) {
+        generateMatrixKruskal();
+    }
 };
 
 function generateMatrixBFS() {
