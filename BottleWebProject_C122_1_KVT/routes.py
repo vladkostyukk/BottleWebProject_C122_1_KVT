@@ -40,4 +40,7 @@ def dfs():
 @route('/kruskal')
 @view('kruskal')
 def kruskal():
-    return
+    return dict(
+        title='Kruskal',
+        year=datetime.now().year
+    )
