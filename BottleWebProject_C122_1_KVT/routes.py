@@ -33,7 +33,10 @@ def bfs():
 @route('/dfs')
 @view('dfs')
 def dfs():
-    return
+    return dict(
+        title='dfs',
+        year=datetime.now().year
+    )
 
 
 @route('/kruskal')

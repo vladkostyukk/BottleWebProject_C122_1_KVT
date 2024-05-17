@@ -1,14 +1,3 @@
-body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
@@ -39,4 +28,90 @@ input[type="checkbox"].input-validation-error {
 
 .validation-summary-valid {
     display: none;
+}
+
+.dfs-title {
+    text-transform: uppercase;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+    font-size: 72px;
+    margin: 2em 0;
+}
+
+.dfs-text {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.dfs-teor {
+
+}
+
+.dfs-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin-top: 70px;
+    margin-left: 35px;
+    margin-right: 35px;
+}
+
+.dfs-card .row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px 35px;
+}
+
+.dfs-card .dfs-card-body {
+    flex: 1 1 auto;
+    padding: 5px 5px;
+}
+
+.dfs-card .dfs-column {
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+
+.dfs-card .dfs-column.dfs-column-right {
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.dfs-card .dfs-card-title {
+    font-weight: bold;
+}
+
+.dfs-card .dfs-card-text {
+    font-size: 2rem;
+}
+
+.dfs-card .dfs-card-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.dfs-card .dfs-card-input {
+
+}
+
+.dfs-card .dfs-empty-cell {
+    background-color: #777;
+    min-width: 60px;
+}
+
+.dfs-card .dfs-card-buttons {
+    margin-top: 10px;
+    vertical-align: bottom;
+}
+
+.dfs-card .dfs-card-buttons .btn {
+    margin-right: 5px;
 }

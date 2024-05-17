@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    <div class="container body-content">
+    <div>
         {{!base}}
         <hr />
         <footer>
