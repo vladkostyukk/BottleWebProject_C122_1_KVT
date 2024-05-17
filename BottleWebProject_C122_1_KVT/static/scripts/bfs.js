@@ -8,31 +8,127 @@ window.onload = function () {
     }
 };
 
+// Функция для генерации матрицы с помощью BFS (Breadth-First Search)
 function generateMatrixBFS() {
-    const n = parseInt(document.getElementById('vertices-input').value);
+    // Получаем количество вершин из элемента с id 'vertices-input-bfs'
+    const n = parseInt(document.getElementById('vertices-input-bfs').value);
     let matrix = '<table>';
 
-    // Создаем верхнюю шапку с номерами столбцов
+    // Создание заголовка таблицы с номерами вершин
     matrix += '<tr><td></td>';
-    for (let j = 0; j < n; j++) {
-        matrix += `<td class="bfs-td" style="height: 30px;">${j + 1}</td>`;
+    for (let i = 0; i < n; i++) {
+        matrix += `<td class="bfs-td" style="height: 30px;">${i + 1}</td>`;
     }
     matrix += '</tr>';
 
+    // Создание ячеек для ввода значений в матрицу
     for (let i = 0; i < n; i++) {
-        matrix += `<tr><td class="bfs-td" style="width: 40px;">${i + 1}</td>`; // Создаем боковую шапку с номерами строк
+        matrix += `<tr><td class="bfs-td" style="width: 40px;">${i + 1}</td>`;
         for (let j = 0; j < n; j++) {
-            matrix += `<td><input class="input_bfs" type="number" min="0" max="1" value="0" id="cell-${i}-${j}"></td>`;
+            if (i === j) {
+                matrix += `<td><input class="input_bfs" type="number" min="0" value="0" id="cell-${i}-${j}" readonly></td>`;
+            } else {
+                matrix += `<td><input class="input_bfs" type="number" value="0" min="0" max="1" id="cell-${i}-${j}"></td>`;
+            }
         }
         matrix += "</tr>";
     }
 
     matrix += '</table>';
     document.getElementById('matrix_bfs').innerHTML = matrix;
+
+    // Добавляем обработчик изменения значений ячеек для обновления симметричных значений
+    document.getElementById('matrix_bfs').addEventListener('change', function (event) {
+        const target = event.target;
+        const value = target.value;
+        const rowIndex = parseInt(target.id.split('-')[1]);
+        const colIndex = parseInt(target.id.split('-')[2]);
+
+        // Обновление значения в симметричной ячейке
+        document.getElementById(`cell-${colIndex}-${rowIndex}`).value = value;
+    });
 }
 
+// Функция для обработки загруженного файла
+function handleFile(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    // Обработчик события onload для FileReader
+    reader.onload = function (e) {
+        const contents = e.target.result.trim();
+        const matrix = parseMatrix(contents);
+
+        // Проверка условий перед отображением матрицы
+        if (matrix.length > 4 && matrix.length < 11 && isSymmetric(matrix) && isValidValues(matrix)) {
+            displayMatrix(matrix);
+        } else {
+            console.log('Matrix is not valid or does not meet the required conditions.');
+        }
+    };
+
+    // Сбросить значение input[type=file], чтобы событие onchange сработало при выборе того же файла
+    event.target.value = '';
+
+    reader.readAsText(file);
+}
+
+// Функция для парсинга содержимого файла в матрицу
+function parseMatrix(contents) {
+    return contents.trim().split('\n').map(row => row.trim().split(' ').map(Number));
+}
+
+// Функция для проверки симметричности матрицы
+function isSymmetric(matrix) {
+    return matrix.every((row, i) =>
+        row.slice(0, i).every((val, j) => val === matrix[j][i])
+    );
+}
+
+// Функция для проверки валидности значений в матрице
+function isValidValues(matrix) {
+    return matrix.every((row, i) =>
+        row.every((value, j) => (i === j) ? (value === 0) : (value === 0 || value === 1))
+    );
+}
+
+// Функция для отображения матрицы в интерфейсе
+function displayMatrix(matrix) {
+    // Устанавливаем количество вершин в поле ввода 'vertices-input-bfs'
+    document.getElementById('vertices-input-bfs').value = matrix.length;
+
+    let matrixHTML = '<table>';
+
+    // Создание заголовка таблицы с номерами вершин
+    matrixHTML += '<tr><td></td>';
+    for (let i = 0; i < matrix.length; i++) {
+        matrixHTML += `<td class="bfs-td" style="height: 30px;">${i + 1}</td>`;
+    }
+
+    matrixHTML += '</tr>';
+
+    // Создание таблицы с ячейками для графа
+    for (let i = 0; i < matrix.length; i++) {
+        matrixHTML += `<tr><td class="bfs-td" style="width: 40px;">${i + 1}</td>`;
+        for (let j = 0; j < matrix.length; j++) {
+            if (i === j) {
+                // Для диагональных элементов устанавливаем только чтение
+                matrixHTML += `<td><input class="input_bfs" type="number" value="${matrix[i][j]}" min="0" max="1" id="cell-${i}-${j}" readonly></td>`;
+            } else {
+                // Для остальных элементов отображаем изменяемые значения
+                matrixHTML += `<td><input class="input_bfs" type="number" value="${matrix[i][j]}" min="0" max="1" id="cell-${i}-${j}"></td>`;
+            }
+        }
+        matrixHTML += "</tr>";
+    }
+
+    matrixHTML += '</table>';
+    document.getElementById('matrix_bfs').innerHTML = matrixHTML;
+}
+
+
 function buildGraphBFS() {
-    const n = parseInt(document.getElementById('vertices-input').value);
+    const n = parseInt(document.getElementById('vertices-input-bfs').value);
     const matrix = [];
 
     // Считываем значения из ячеек матрицы
