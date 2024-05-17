@@ -92,6 +92,26 @@ function isValidValues(matrix) {
     );
 }
 
+// Функция для генерации рандомной квадратной матрицы с заданным размером
+function generateRandomMatrix() {
+    // Генерация случайного размера матрицы от 3 до 10
+    const n = Math.floor(Math.random() * (10 - 3 + 1)) + 3;
+
+    // Создание квадратной матрицы размера n x n, заполненной нулями
+    let matrix = Array.from({ length: n }, () => Array(n).fill(0));
+
+    // Заполнение верхнего треугольника матрицы случайными значениями и делаем матрицу симметричной
+    for (let i = 0; i < n; i++) {
+        for (let j = i + 1; j < n; j++) {
+            matrix[i][j] = Math.round(Math.random());
+            matrix[j][i] = matrix[i][j]; // Отражаем значение, чтобы матрица была симметричной
+        }
+    }
+
+    // Вызов функции для отображения матрицы
+    displayMatrix(matrix);
+}
+
 // Функция для отображения матрицы в интерфейсе
 function displayMatrix(matrix) {
     // Устанавливаем количество вершин в поле ввода 'vertices-input-bfs'

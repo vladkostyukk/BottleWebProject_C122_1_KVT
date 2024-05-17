@@ -24,10 +24,10 @@
 
     <h3>Матрица смежности:</h3>
 
-    <div id="matrix_bfs" onload="buildGraphBFS()"></div>
+    <div id="matrix_bfs"></div>
 
     <a class="floating-button" onclick="buildGraphBFS(); location.href='#graph';">Построить</a>
-    <a class="floating-button" style="width: 170px;">Сгенерировать</a>
+    <a class="floating-button" onclick="generateRandomMatrix()" style="width: 170px;">Сгенерировать</a>
 
     <label class="input-file-bfs">
 	   	<input type="file" name="file" accept=".txt" onchange="handleFile(event)">		
