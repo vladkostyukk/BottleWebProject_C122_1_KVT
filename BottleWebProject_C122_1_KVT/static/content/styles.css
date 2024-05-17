@@ -437,21 +437,6 @@ input[type=radio]:checked + .tablist__label {
     width: 100px;
 }
 
-.rounded-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 30px;
-    background-color: #639cd6;
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 5px;
-}
-
-    .rounded-button:hover {
-        background-color: #2162a4;
-    }
-
 .bfs-td {
     text-align: center;
     font-weight: bold;
@@ -589,3 +574,31 @@ img {
     font-style: italic;
     font-size: 0.9em;
 }
+
+.floating-button-Kruskal {
+    text-decoration: none;
+    display: inline-block;
+    width: 160px;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 45px;
+    margin: 20px 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 3px;
+    font-weight: 600;
+    color: black;
+    background: #639cd6;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+    transition: .3s;
+    border: 0px;
+}
+
+    .floating-button-Kruskal:hover {
+        background: #2162a4;
+        box-shadow: 0 15px 20px rgba(33, 98, 164, .4);
+        color: white;
+        text-decoration: none;
+    }

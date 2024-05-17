@@ -88,15 +88,15 @@
             <form action="/home" method="post">
             <p>Количество вершин графа:</p>
             <p>
-                <input type="number" id="vertices-input" name="vertexCount" min="1" max="9" value="3" onchange="generateMatrix()" class="rounded-input" oninput="this.value = Math.min(Math.max(this.value, 1), 9)">
+                <input type="number" id="vertices-input" name="vertexCount" min="1" max="9" value="3" onchange="generateMatrixKruskal()" class="rounded-input" oninput="this.value = Math.min(Math.max(this.value, 1), 9)">
             </p>
             <p>Матрица весов рёбер:</p>
             <div id="matrix_kruskal"></div>
             <p></p>
             <p>
-                <button type="button" class="rounded-button" onclick="buildGraph()">Построить</button>
-                <button type="button" class="rounded-button">Сгенерировать</button>
-                <button type="button" class="rounded-button">Из файла</button>
+                <button type="button" class="floating-button-Kruskal" onclick="buildGraphKruskal()">Построить</button>
+                <button type="button" class="floating-button-Kruskal">Сгенерировать</button>
+                <button type="button" class="floating-button-Kruskal">Из файла</button>
             </p>
             </form>
             <div id="network" style="width: 600px; height: 400px;"></div>

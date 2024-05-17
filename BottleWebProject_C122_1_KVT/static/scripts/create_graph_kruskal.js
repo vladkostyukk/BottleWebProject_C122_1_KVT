@@ -1,4 +1,4 @@
-function buildGraph() {
+function buildGraphKruskal() {
     // Получение количества вершин графа из поля ввода
     var vertexCount = parseInt(document.getElementById("vertices-input").value);
 
