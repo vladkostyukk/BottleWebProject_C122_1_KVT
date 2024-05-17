@@ -19,7 +19,7 @@
 
     <div class="form-group">
         <h3>Количество вершин графа:</h3>
-        <input class="input_bfs" type="number" id="vertices-input" min="3" max="20" value="3" onchange="generateMatrixBFS()">
+        <input class="input_bfs" type="number" id="vertices-input-bfs" min="3" max="10" value="3" onchange="generateMatrixBFS()">
     </div>
 
     <h3>Матрица смежности:</h3>
@@ -28,7 +28,11 @@
 
     <a class="floating-button" onclick="buildGraphBFS(); location.href='#graph';">Построить</a>
     <a class="floating-button" style="width: 170px;">Сгенерировать</a>
-    <a class="floating-button">Из файла</a>
-    
-    <!-- <div id="graph"></div> -->
+
+    <label class="input-file-bfs">
+	   	<input type="file" name="file" accept=".txt" onchange="handleFile(event)">		
+	   	<span>Из файла</span>
+ 	</label>
+
+    <div id="graph"></div>
 </div>
