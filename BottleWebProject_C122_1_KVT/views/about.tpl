@@ -1,6 +1,7 @@
 % rebase('layout.tpl', title=title, year=year)
 
-<div class="body_about">
+<div class="body_about"></div>
+<div class="text__about">
     <div class="header header_about">
          <h1>О нас</h1>
          <p><center>Студенты ФСПО ГУАП группа С122</center></p>
