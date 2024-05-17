@@ -88,7 +88,7 @@
             <form action="/home" method="post">
             <p>Количество вершин графа:</p>
             <p>
-                <input type="number" id="vertices-input" name="vertexCount" min="1" max="10" value="3" onchange="generateMatrix()" class="rounded-input" oninput="this.value = Math.min(Math.max(this.value, 1), 10)">
+                <input type="number" id="vertices-input" name="vertexCount" min="1" max="9" value="3" onchange="generateMatrix()" class="rounded-input" oninput="this.value = Math.min(Math.max(this.value, 1), 9)">
             </p>
             <p>Матрица весов рёбер:</p>
             <div id="matrix_kruskal"></div>

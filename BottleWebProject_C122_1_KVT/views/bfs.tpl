@@ -19,14 +19,14 @@
 
     <div class="form-group">
         <h3>Количество вершин графа:</h3>
-        <input class="input_bfs" type="number" id="vertices-input" min="3" max="20" value="3" onchange="generateMatrix()">
+        <input class="input_bfs" type="number" id="vertices-input" min="3" max="20" value="3" onchange="generateMatrixBFS()">
     </div>
 
     <h3>Матрица смежности:</h3>
 
-    <div id="matrix_bfs"></div>
+    <div id="matrix_bfs" onload="buildGraphBFS()"></div>
 
-    <a class="floating-button" onclick="buildGraph(); location.href='#graph';">Построить</a>
+    <a class="floating-button" onclick="buildGraphBFS(); location.href='#graph';">Построить</a>
     <a class="floating-button" style="width: 170px;">Сгенерировать</a>
     <a class="floating-button">Из файла</a>
 

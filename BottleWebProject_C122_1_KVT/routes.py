@@ -30,7 +30,6 @@ def bfs():
         year=datetime.now().year
     )
 
-
 @route('/dfs')
 @view('dfs')
 def dfs():
@@ -41,6 +40,6 @@ def dfs():
 @view('kruskal')
 def kruskal():
     return dict(
-        title='Kruskal',
+        title='Алгоритм Краскала',
         year=datetime.now().year
     )

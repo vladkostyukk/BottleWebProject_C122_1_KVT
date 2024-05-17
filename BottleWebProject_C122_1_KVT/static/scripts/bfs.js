@@ -1,6 +1,10 @@
-window.onload = generateMatrix;
+window.onload = function () {
+    if (window.location.href.includes("/bfs")) {
+        generateMatrixBFS();
+    }
+};
 
-function generateMatrix() {
+function generateMatrixBFS() {
     const n = parseInt(document.getElementById('vertices-input').value);
     let matrix = '<table>';
 
@@ -23,7 +27,7 @@ function generateMatrix() {
     document.getElementById('matrix_bfs').innerHTML = matrix;
 }
 
-function buildGraph() {
+function buildGraphBFS() {
     const n = parseInt(document.getElementById('vertices-input').value);
     const matrix = [];
 
