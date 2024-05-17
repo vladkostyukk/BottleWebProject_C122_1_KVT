@@ -58,6 +58,7 @@ input[type="checkbox"].input-validation-error {
     margin-top: 70px;
     margin-left: 35px;
     margin-right: 35px;
+    background-color: white;
 }
 
 .dfs-card .row {
