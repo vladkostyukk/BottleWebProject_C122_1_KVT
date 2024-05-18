@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -76,6 +76,8 @@
     <script src="/static/scripts/matrix_kruskal.js"></script>
     <script src="/static/scripts/switch_calc.js"></script>
     <script src="/static/scripts/create_graph_kruskal.js"></script>
+    <script src="/static/scripts/generate_matrix_kruskal.js"></script>
+    <script src="/static/scripts/from_file_kruskal.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
 
 </body>

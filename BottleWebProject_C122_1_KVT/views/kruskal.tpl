@@ -88,19 +88,27 @@
             <form action="/home" method="post">
             <p>Количество вершин графа:</p>
             <p>
-                <input type="number" id="vertices-input" name="vertexCount" min="1" max="9" value="3" onchange="generateMatrixKruskal()" class="rounded-input" oninput="this.value = Math.min(Math.max(this.value, 1), 9)">
+                <input type="number" id="vertices-input" name="vertexCount" min="3" max="10" value="3" onchange="generateMatrixKruskal()" class="rounded-input" oninput="this.value = Math.min(Math.max(this.value, 3), 10)">
             </p>
             <p>Матрица весов рёбер:</p>
             <div id="matrix_kruskal"></div>
             <p></p>
             <p>
                 <button type="button" class="floating-button-Kruskal" onclick="buildGraphKruskal()">Построить</button>
-                <button type="button" class="floating-button-Kruskal">Сгенерировать</button>
-                <button type="button" class="floating-button-Kruskal">Из файла</button>
+                <button type="button" class="floating-button-Kruskal" onclick="generationMatrixKruskal()">Сгенерировать</button>
+                <label class="input-file-kruskal">
+	                <input type="file" name="file" accept=".txt" onchange="handleFileKruskal(event)">		
+	                <span>Из файла</span>
+                </label>
+                <center><div id="error-message" style="display: none; color: red; font-weight: bold; font-size: 20px;"></div></center>
+                <div id="graphButtons" style="display: none;">
+                    <center><div id="network" style="width: 700px; height: 400px; border: 3px solid #2162a4; margin-top: 15px;"></div></center>
+                    <center><button type="button" class="floating-button-Kruskal" onclick="saveGraphKruskal()">Сохранить граф</button>
+                    <button type="button" class="floating-button-Kruskal" style="width: 250px;" onclick="runKruskalAlgorithm()">Найти кратчайший остов</button></center>
+                </div>
             </p>
             </form>
-            <div id="network" style="width: 600px; height: 400px;"></div>
         </article>
         </div>
-    </div>
-    </div>
+  </div>
+</div>
