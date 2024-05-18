@@ -8,21 +8,23 @@ window.onload = function () {
     }
 };
 
-// Функция для генерации матрицы с помощью BFS (Breadth-First Search)
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РіРµРЅРµСЂР°С†РёРё РјР°С‚СЂРёС†С‹ СЃ РїРѕРјРѕС‰СЊСЋ BFS (Breadth-First Search)
 function generateMatrixBFS() {
-    // Получаем количество вершин из элемента с id 'vertices-input-bfs'
+    // РџРѕР»СѓС‡Р°РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ РІРµСЂС€РёРЅ РёР· СЌР»РµРјРµРЅС‚Р° СЃ id 'vertices-input-bfs'
     const n = parseInt(document.getElementById('vertices-input-bfs').value);
     updateStartInputMaxValueBasedOnVertices(n);
+    document.getElementById('error-message-bfs').style.display = 'none';
+
     let matrix = '<table>';
 
-    // Создание заголовка таблицы с номерами вершин
+    // РЎРѕР·РґР°РЅРёРµ Р·Р°РіРѕР»РѕРІРєР° С‚Р°Р±Р»РёС†С‹ СЃ РЅРѕРјРµСЂР°РјРё РІРµСЂС€РёРЅ
     matrix += '<tr><td></td>';
     for (let i = 0; i < n; i++) {
         matrix += `<td class="bfs-td" style="height: 30px;">${i + 1}</td>`;
     }
     matrix += '</tr>';
 
-    // Создание ячеек для ввода значений в матрицу
+    // РЎРѕР·РґР°РЅРёРµ СЏС‡РµРµРє РґР»СЏ РІРІРѕРґР° Р·РЅР°С‡РµРЅРёР№ РІ РјР°С‚СЂРёС†Сѓ
     for (let i = 0; i < n; i++) {
         matrix += `<tr><td class="bfs-td" style="width: 40px;">${i + 1}</td>`;
         for (let j = 0; j < n; j++) {
@@ -38,107 +40,118 @@ function generateMatrixBFS() {
     matrix += '</table>';
     document.getElementById('matrix_bfs').innerHTML = matrix;
 
-    // Добавляем обработчик изменения значений ячеек для обновления симметричных значений
+    // Р”РѕР±Р°РІР»СЏРµРј РѕР±СЂР°Р±РѕС‚С‡РёРє РёР·РјРµРЅРµРЅРёСЏ Р·РЅР°С‡РµРЅРёР№ СЏС‡РµРµРє РґР»СЏ РѕР±РЅРѕРІР»РµРЅРёСЏ СЃРёРјРјРµС‚СЂРёС‡РЅС‹С… Р·РЅР°С‡РµРЅРёР№
     document.getElementById('matrix_bfs').addEventListener('change', function (event) {
         const target = event.target;
         const value = target.value;
         const rowIndex = parseInt(target.id.split('-')[1]);
         const colIndex = parseInt(target.id.split('-')[2]);
 
-        // Обновление значения в симметричной ячейке
+        // РћР±РЅРѕРІР»РµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РІ СЃРёРјРјРµС‚СЂРёС‡РЅРѕР№ СЏС‡РµР№РєРµ
         document.getElementById(`cell-${colIndex}-${rowIndex}`).value = value;
+
+        document.getElementById('error-message-bfs').style.display = 'none';
     });
 }
 
 /**
- * Обновляет максимальное значение поля начальной вершины.
- * @param {number} verticesValue Количество вершин графа.
+ * РћР±РЅРѕРІР»СЏРµС‚ РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РїРѕР»СЏ РЅР°С‡Р°Р»СЊРЅРѕР№ РІРµСЂС€РёРЅС‹.
+ * @param {number} verticesValue РљРѕР»РёС‡РµСЃС‚РІРѕ РІРµСЂС€РёРЅ РіСЂР°С„Р°.
  */
 function updateStartInputMaxValueBasedOnVertices(verticesValue) {
-    // Получаем текущее значение начальной вершины
+    // РџРѕР»СѓС‡Р°РµРј С‚РµРєСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ РЅР°С‡Р°Р»СЊРЅРѕР№ РІРµСЂС€РёРЅС‹
     const startValue = parseInt(document.getElementById('start-input-bfs').value);
 
-    // Устанавливаем максимальное значение начальной вершины равным значению количества вершин
+    // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РЅР°С‡Р°Р»СЊРЅРѕР№ РІРµСЂС€РёРЅС‹ СЂР°РІРЅС‹Рј Р·РЅР°С‡РµРЅРёСЋ РєРѕР»РёС‡РµСЃС‚РІР° РІРµСЂС€РёРЅ
     document.getElementById('start-input-bfs').setAttribute('max', verticesValue);
 
-    // Если текущее значение начальной вершины больше нового максимального значения, корректируем его
+    // Р•СЃР»Рё С‚РµРєСѓС‰РµРµ Р·РЅР°С‡РµРЅРёРµ РЅР°С‡Р°Р»СЊРЅРѕР№ РІРµСЂС€РёРЅС‹ Р±РѕР»СЊС€Рµ РЅРѕРІРѕРіРѕ РјР°РєСЃРёРјР°Р»СЊРЅРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ, РєРѕСЂСЂРµРєС‚РёСЂСѓРµРј РµРіРѕ
     if (startValue > verticesValue) {
         document.getElementById('start-input-bfs').value = verticesValue;
     }
 }
 
-// Функция для обработки загруженного файла
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё Р·Р°РіСЂСѓР¶РµРЅРЅРѕРіРѕ С„Р°Р№Р»Р°
 function handleFile(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
-
-    // Обработчик события onload для FileReader
+    const errorMessage = document.getElementById('error-message-bfs');
+    
+    // РћР±СЂР°Р±РѕС‚С‡РёРє СЃРѕР±С‹С‚РёСЏ onload РґР»СЏ FileReader
     reader.onload = function (e) {
         const contents = e.target.result.trim();
         const matrix = parseMatrix(contents);
 
-        // Проверка условий перед отображением матрицы
-        if (matrix.length > 4 && matrix.length < 11 && isSymmetric(matrix) && isValidValues(matrix)) {
-            displayMatrix(matrix);
+        if (matrix.length < 3 || matrix.length > 10) {
+            errorMessage.textContent = 'РќРµРєРѕСЂСЂРµРєС‚РЅР°СЏ СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ РєРІР°РґСЂР°С‚РЅРѕР№ РјР°С‚СЂРёС†С‹ (2 < n < 11).';
+            errorMessage.style.display = 'inline'; // РџРѕРєР°Р·Р°С‚СЊ СЃРѕРѕР±С‰РµРЅРёРµ РѕР± РѕС€РёР±РєРµ
+        } else if (!isSymmetric(matrix)) {
+            errorMessage.textContent = 'РњР°С‚СЂРёС†Р° РЅРµСЃРёРјРјРµС‚СЂРёС‡РЅР°.';
+            errorMessage.style.display = 'inline'; // РџРѕРєР°Р·Р°С‚СЊ СЃРѕРѕР±С‰РµРЅРёРµ РѕР± РѕС€РёР±РєРµ
+        } else if (!isValidValues(matrix)) {
+            errorMessage.textContent = 'Р’ РјР°С‚СЂРёС†Рµ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ (0 РёР»Рё 1).';
+            errorMessage.style.display = 'inline'; // РџРѕРєР°Р·Р°С‚СЊ СЃРѕРѕР±С‰РµРЅРёРµ РѕР± РѕС€РёР±РєРµ
         } else {
-            console.log('Matrix is not valid or does not meet the required conditions.');
+            errorMessage.style.display = 'none'; // РЎРєСЂС‹С‚СЊ СЃРѕРѕР±С‰РµРЅРёРµ РѕР± РѕС€РёР±РєРµ, РµСЃР»Рё РјР°С‚СЂРёС†Р° РІР°Р»РёРґРЅР°
+            displayMatrix(matrix);
         }
     };
 
-    // Сбросить значение input[type=file], чтобы событие onchange сработало при выборе того же файла
+    // РЎР±СЂРѕСЃРёС‚СЊ Р·РЅР°С‡РµРЅРёРµ input[type=file], С‡С‚РѕР±С‹ СЃРѕР±С‹С‚РёРµ onchange СЃСЂР°Р±РѕС‚Р°Р»Рѕ РїСЂРё РІС‹Р±РѕСЂРµ С‚РѕРіРѕ Р¶Рµ С„Р°Р№Р»Р°
     event.target.value = '';
 
     reader.readAsText(file);
 }
 
-// Функция для парсинга содержимого файла в матрицу
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РїР°СЂСЃРёРЅРіР° СЃРѕРґРµСЂР¶РёРјРѕРіРѕ С„Р°Р№Р»Р° РІ РјР°С‚СЂРёС†Сѓ
 function parseMatrix(contents) {
     return contents.trim().split('\n').map(row => row.trim().split(' ').map(Number));
 }
 
-// Функция для проверки симметричности матрицы
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РїСЂРѕРІРµСЂРєРё СЃРёРјРјРµС‚СЂРёС‡РЅРѕСЃС‚Рё РјР°С‚СЂРёС†С‹
 function isSymmetric(matrix) {
     return matrix.every((row, i) =>
         row.slice(0, i).every((val, j) => val === matrix[j][i])
     );
 }
 
-// Функция для проверки валидности значений в матрице
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РїСЂРѕРІРµСЂРєРё РІР°Р»РёРґРЅРѕСЃС‚Рё Р·РЅР°С‡РµРЅРёР№ РІ РјР°С‚СЂРёС†Рµ
 function isValidValues(matrix) {
     return matrix.every((row, i) =>
         row.every((value, j) => (i === j) ? (value === 0) : (value === 0 || value === 1))
     );
 }
 
-// Функция для генерации рандомной квадратной матрицы с заданным размером
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РіРµРЅРµСЂР°С†РёРё СЂР°РЅРґРѕРјРЅРѕР№ РєРІР°РґСЂР°С‚РЅРѕР№ РјР°С‚СЂРёС†С‹ СЃ Р·Р°РґР°РЅРЅС‹Рј СЂР°Р·РјРµСЂРѕРј
 function generateRandomMatrix() {
-    // Генерация случайного размера матрицы от 3 до 10
+    // Р“РµРЅРµСЂР°С†РёСЏ СЃР»СѓС‡Р°Р№РЅРѕРіРѕ СЂР°Р·РјРµСЂР° РјР°С‚СЂРёС†С‹ РѕС‚ 3 РґРѕ 10
     const n = Math.floor(Math.random() * (10 - 3 + 1)) + 3;
 
-    // Создание квадратной матрицы размера n x n, заполненной нулями
+    // РЎРѕР·РґР°РЅРёРµ РєРІР°РґСЂР°С‚РЅРѕР№ РјР°С‚СЂРёС†С‹ СЂР°Р·РјРµСЂР° n x n, Р·Р°РїРѕР»РЅРµРЅРЅРѕР№ РЅСѓР»СЏРјРё
     let matrix = Array.from({ length: n }, () => Array(n).fill(0));
 
-    // Заполнение верхнего треугольника матрицы случайными значениями и делаем матрицу симметричной
+    // Р—Р°РїРѕР»РЅРµРЅРёРµ РІРµСЂС…РЅРµРіРѕ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР° РјР°С‚СЂРёС†С‹ СЃР»СѓС‡Р°Р№РЅС‹РјРё Р·РЅР°С‡РµРЅРёСЏРјРё Рё РґРµР»Р°РµРј РјР°С‚СЂРёС†Сѓ СЃРёРјРјРµС‚СЂРёС‡РЅРѕР№
     for (let i = 0; i < n; i++) {
         for (let j = i + 1; j < n; j++) {
             matrix[i][j] = Math.round(Math.random());
-            matrix[j][i] = matrix[i][j]; // Отражаем значение, чтобы матрица была симметричной
+            matrix[j][i] = matrix[i][j]; // РћС‚СЂР°Р¶Р°РµРј Р·РЅР°С‡РµРЅРёРµ, С‡С‚РѕР±С‹ РјР°С‚СЂРёС†Р° Р±С‹Р»Р° СЃРёРјРјРµС‚СЂРёС‡РЅРѕР№
         }
     }
 
-    // Вызов функции для отображения матрицы
+    // Р’С‹Р·РѕРІ С„СѓРЅРєС†РёРё РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РјР°С‚СЂРёС†С‹
     displayMatrix(matrix);
 }
 
-// Функция для отображения матрицы в интерфейсе
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РјР°С‚СЂРёС†С‹ РІ РёРЅС‚РµСЂС„РµР№СЃРµ
 function displayMatrix(matrix) {
-    // Устанавливаем количество вершин в поле ввода 'vertices-input-bfs'
+    // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ РІРµСЂС€РёРЅ РІ РїРѕР»Рµ РІРІРѕРґР° 'vertices-input-bfs'
     document.getElementById('vertices-input-bfs').value = matrix.length;
+    document.getElementById('error-message-bfs').style.display = 'none';
     updateStartInputMaxValueBasedOnVertices(matrix.length);
 
     let matrixHTML = '<table>';
 
-    // Создание заголовка таблицы с номерами вершин
+    // РЎРѕР·РґР°РЅРёРµ Р·Р°РіРѕР»РѕРІРєР° С‚Р°Р±Р»РёС†С‹ СЃ РЅРѕРјРµСЂР°РјРё РІРµСЂС€РёРЅ
     matrixHTML += '<tr><td></td>';
     for (let i = 0; i < matrix.length; i++) {
         matrixHTML += `<td class="bfs-td" style="height: 30px;">${i + 1}</td>`;
@@ -146,15 +159,15 @@ function displayMatrix(matrix) {
 
     matrixHTML += '</tr>';
 
-    // Создание таблицы с ячейками для графа
+    // РЎРѕР·РґР°РЅРёРµ С‚Р°Р±Р»РёС†С‹ СЃ СЏС‡РµР№РєР°РјРё РґР»СЏ РіСЂР°С„Р°
     for (let i = 0; i < matrix.length; i++) {
         matrixHTML += `<tr><td class="bfs-td" style="width: 40px;">${i + 1}</td>`;
         for (let j = 0; j < matrix.length; j++) {
             if (i === j) {
-                // Для диагональных элементов устанавливаем только чтение
+                // Р”Р»СЏ РґРёР°РіРѕРЅР°Р»СЊРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј С‚РѕР»СЊРєРѕ С‡С‚РµРЅРёРµ
                 matrixHTML += `<td><input class="input_bfs" type="number" value="${matrix[i][j]}" min="0" max="1" id="cell-${i}-${j}" readonly></td>`;
             } else {
-                // Для остальных элементов отображаем изменяемые значения
+                // Р”Р»СЏ РѕСЃС‚Р°Р»СЊРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ РѕС‚РѕР±СЂР°Р¶Р°РµРј РёР·РјРµРЅСЏРµРјС‹Рµ Р·РЅР°С‡РµРЅРёСЏ
                 matrixHTML += `<td><input class="input_bfs" type="number" value="${matrix[i][j]}" min="0" max="1" id="cell-${i}-${j}"></td>`;
             }
         }
@@ -169,7 +182,7 @@ function buildGraphBFS() {
     const n = parseInt(document.getElementById('vertices-input-bfs').value);
     const matrix = [];
 
-    // Считываем значения из ячеек матрицы
+    // РЎС‡РёС‚С‹РІР°РµРј Р·РЅР°С‡РµРЅРёСЏ РёР· СЏС‡РµРµРє РјР°С‚СЂРёС†С‹
     for (let i = 0; i < n; i++) {
         matrix.push([]);
         for (let j = 0; j < n; j++) {
@@ -177,17 +190,17 @@ function buildGraphBFS() {
         }
     }
 
-    // Удаляем предыдущие элементы графа, если они были
+    // РЈРґР°Р»СЏРµРј РїСЂРµРґС‹РґСѓС‰РёРµ СЌР»РµРјРµРЅС‚С‹ РіСЂР°С„Р°, РµСЃР»Рё РѕРЅРё Р±С‹Р»Рё
     d3.select('svg').remove();
 
-    // Создаем SVG контейнер для отображения графа
+    // РЎРѕР·РґР°РµРј SVG РєРѕРЅС‚РµР№РЅРµСЂ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РіСЂР°С„Р°
     const width = 400;
     const height = 400;
     const svg = d3.select('#graph').append('svg')
         .attr('width', width)
         .attr('height', height);
 
-    // Отображение вершин графа
+    // РћС‚РѕР±СЂР°Р¶РµРЅРёРµ РІРµСЂС€РёРЅ РіСЂР°С„Р°
     const nodeRadius = 20;
     const nodes = Array.from({ length: n }, (_, i) => ({ id: i }));
     const node = svg.selectAll('.node')
@@ -196,7 +209,7 @@ function buildGraphBFS() {
         .attr('r', nodeRadius)
         .attr('fill', 'black');
 
-    // Отрисовка связей между вершинами
+    // РћС‚СЂРёСЃРѕРІРєР° СЃРІСЏР·РµР№ РјРµР¶РґСѓ РІРµСЂС€РёРЅР°РјРё
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
             if (matrix[i][j] === 1) {
@@ -211,11 +224,11 @@ function buildGraphBFS() {
         }
     }
 
-    // Позиционирование вершин на окружности
+    // РџРѕР·РёС†РёРѕРЅРёСЂРѕРІР°РЅРёРµ РІРµСЂС€РёРЅ РЅР° РѕРєСЂСѓР¶РЅРѕСЃС‚Рё
     node.attr('cx', (_, i) => width / 2 + Math.cos(2 * Math.PI * i / n) * (width / 2 - nodeRadius))
         .attr('cy', (_, i) => height / 2 + Math.sin(2 * Math.PI * i / n) * (height / 2 - nodeRadius));
 
-    // Добавление номеров вершин
+    // Р”РѕР±Р°РІР»РµРЅРёРµ РЅРѕРјРµСЂРѕРІ РІРµСЂС€РёРЅ
     svg.selectAll('.node-label')
         .data(nodes)
         .enter().append('text')

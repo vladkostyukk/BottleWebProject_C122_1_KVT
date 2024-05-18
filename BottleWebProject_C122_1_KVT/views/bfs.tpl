@@ -3,7 +3,7 @@
 <div class="bfs-background"</div>
 
 <div class="bfs-block-theory">
-    <h1>Алгоритм поиска в ширину</h1>
+    <h1>Алгоритм поиска &laquo;в ширину&raquo;</h1>
     <div class="bfs-div-theory">
 	    <div>
 		    <p><b>Поиск в ширину</b> (англ. breadth-first search) – один из основных алгоритмов на графах, позволяющий находить все кратчайшие пути от заданной вершины и решать многие другие задачи.</p>
@@ -29,15 +29,20 @@
 
     <h3>Матрица смежности:</h3>
 
+    <div style="display: flex; align-items: left;">
+        <a class="floating-button" onclick="generateRandomMatrix()" style="width: 170px;">Сгенерировать</a>
+
+        <div>
+            <label class="input-file-bfs">
+                <input type="file" name="file" accept=".txt" onchange="handleFile(event)">
+                <span id="span-text-bfs">Из файла</span>
+            </label>
+            <span id="error-message-bfs"></span>
+        </div>
+    </div>
     <div id="matrix_bfs"></div>
 
     <a class="floating-button" onclick="buildGraphBFS(); location.href='#graph';">Построить</a>
-    <a class="floating-button" onclick="generateRandomMatrix()" style="width: 170px;">Сгенерировать</a>
-
-    <label class="input-file-bfs">
-	   	<input type="file" name="file" accept=".txt" onchange="handleFile(event)">		
-	   	<span>Из файла</span>
- 	</label>
 
     <div id="graph"></div>
 </div>
