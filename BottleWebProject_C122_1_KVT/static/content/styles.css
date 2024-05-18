@@ -347,6 +347,7 @@ footer {
 .header_kruskal {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
     .header_kruskal h1 {
@@ -567,8 +568,6 @@ img {
     margin-top: 5px;
 }
 
-
-
 .custom-figcaption {
     text-align: left;
     font-style: italic;
@@ -599,6 +598,50 @@ img {
     .floating-button-Kruskal:hover {
         background: #2162a4;
         box-shadow: 0 15px 20px rgba(33, 98, 164, .4);
+        color: white;
+        text-decoration: none;
+    }
+
+.input-file-kruskal {
+    position: relative;
+    display: inline-block;
+}
+
+    .input-file-kruskal span {
+        text-decoration: none;
+        display: inline-block;
+        width: 140px;
+        height: 45px;
+        line-height: 45px;
+        border-radius: 45px;
+        margin: 20px 16px 20px 0px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 11px;
+        text-transform: uppercase;
+        text-align: center;
+        cursor: pointer;
+        letter-spacing: 3px;
+        font-weight: 600;
+        color: black;
+        background: #639cd6;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+        transition: .3s;
+    }
+
+    .input-file-kruskal input[type=file] {
+        display: none;
+    }
+
+    .input-file-kruskal:hover span {
+        background: #2162a4;
+        box-shadow: 0 15px 20px rgba(33, 98, 164, .4);
+        color: white;
+        text-decoration: none;
+    }
+
+    .input-file-kruskal:active span {
+        background: #2162a4;
+        box-shadow: 0 15px 20px rgba(140, 198, 63, .4);
         color: white;
         text-decoration: none;
     }
