@@ -1,80 +1,84 @@
 function buildGraphKruskal() {
-    // Получение количества вершин графа из поля ввода
     var vertexCount = parseInt(document.getElementById("vertices-input").value);
+    var graphData = { nodes: [], edges: [] };
+    const errorMessageElement = document.getElementById('error-message');
 
-    // Создание объекта для хранения данных о графе
-    var graphData = {
-        nodes: [],
-        edges: []
-    };
-
-    // Генерация вершин графа
     for (var i = 0; i < vertexCount; i++) {
-        graphData.nodes.push({ id: i, label: String(i), shape: "circle" });
+        graphData.nodes.push({ id: i, label: String(i), shape: "circle", size: 40 }); // увеличиваем размер узлов до 40
     }
 
-    // Генерация рёбер графа
     for (var i = 0; i < vertexCount; i++) {
         for (var j = i + 1; j < vertexCount; j++) {
-            // Получение веса ребра из матрицы весов
             var weight = document.getElementById(`cell-${i}-${j}`).value;
-            // Проверка наличия введенного веса и его отличия от нуля
             if (weight !== "" && parseFloat(weight) !== 0) {
-                // Добавление ребра с весом и числом обозначающим его вес
-                graphData.edges.push({ from: i, to: j, label: weight, title: String(weight), smooth: { enabled: false }, arrows: { to: { enabled: false } } });
+                graphData.edges.push({
+                    from: i,
+                    to: j,
+                    label: weight,
+                    title: String(weight),
+                    smooth: { enabled: false },
+                    arrows: { to: { enabled: false } },
+                    width: 2 // увеличиваем толщину ребер
+                });
             }
         }
     }
 
-    // Очистка контейнера для графа
     var container = document.getElementById("network");
     container.innerHTML = "";
 
-    // Создание объекта для отображения графа
     var options = {
         layout: {
-            hierarchical: {
-                direction: "UD", // вертикальное направление
-                sortMethod: "directed", // сортировка направленных рёбер
-                nodeSpacing: 150, // расстояние между узлами
-                levelSeparation: 200 // расстояние между уровнями
-            }
-        },
-        nodes: {
-            shape: "circle",
-            size: 30, // Увеличиваем размер узлов
-            font: {
-                size: 18,
-                face: "Arial",
-                bold: {
-                    size: 14,
-                    vadjust: 0
-                }
-            },
-            margin: 20,
-            borderWidth: 2, // Увеличиваем ширину границы узлов для лучшей видимости
-            borderWidthSelected: 2 // Увеличиваем ширину границы выбранных узлов
-        },
-        edges: {
-            smooth: false, // Прямые линии без изгибов
-            arrows: { to: { enabled: false } }, // Отключаем стрелки направления
-            font: {
-                align: 'middle',
-                size: 14, // Уменьшаем размер шрифта для меток рёбер, чтобы уменьшить перекрытие
-                strokeWidth: 1, // Устанавливаем ширину обводки для улучшения видимости текста
-                strokeColor: '#ffffff' // Цвет обводки текста (белый для лучшего контраста)
-            },
-            scaling: {
-                label: true
-            },
-            widthConstraint: {
-                maximum: 50 // Устанавливаем максимальную ширину для рёбер, чтобы избежать перекрытия
-            }
+            improvedLayout: true,
+            randomSeed: 2, // фиксируем начальное положение узлов
+            clusterThreshold: 150,
+            hierarchical: { enabled: false }
         },
         physics: {
-            enabled: false // Отключаем физическую симуляцию для статичного отображения
+            enabled: true,
+            barnesHut: {
+                gravitationalConstant: -30000,
+                centralGravity: 0.1,
+                springLength: 200,
+                springConstant: 0.05,
+                damping: 0.09,
+                avoidOverlap: 1
+            },
+            solver: 'barnesHut',
+            stabilization: {
+                enabled: true,
+                iterations: 1000,
+                fit: true // автоматически подгонять граф к контейнеру
+            },
+            minVelocity: 0.75,
+            maxVelocity: 50
+        },
+        interaction: { navigationButtons: true, keyboard: true },
+        nodes: {
+            shape: "circle",
+            size: 40, // увеличиваем размер узлов до 40
+            font: { size: 20, face: "Arial", bold: { size: 14, vadjust: 0 } },
+            margin: 20,
+            borderWidth: 2,
+            borderWidthSelected: 2
+        },
+        edges: {
+            smooth: false,
+            arrows: { to: { enabled: true } }, 
+            font: {
+                align: 'middle',
+                size: 16,
+                strokeWidth: 1,
+                strokeColor: '#ffffff'
+            },
+            scaling: { label: true },
+            widthConstraint: { maximum: 50 }
         }
     };
 
     var network = new vis.Network(container, graphData, options);
+    network.fit(); // автоматически масштабируем граф
+
+    document.getElementById('graphButtons').style.display = 'block';
+    errorMessageElement.style.display = 'none';
 }
