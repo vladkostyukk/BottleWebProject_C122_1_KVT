@@ -146,7 +146,6 @@ function displayMatrix(matrix) {
     document.getElementById('matrix_bfs').innerHTML = matrixHTML;
 }
 
-
 function buildGraphBFS() {
     const n = parseInt(document.getElementById('vertices-input-bfs').value);
     const matrix = [];

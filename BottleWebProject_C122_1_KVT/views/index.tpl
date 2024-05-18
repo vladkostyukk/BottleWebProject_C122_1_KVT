@@ -1,7 +1,7 @@
 % rebase('layout.tpl', title='Главная', year=year)
 
 <!-- Фоновое изображение -->
-<div class="index-background"></div>
+<div class="body_about"></div>
 
 <div class="index-text-div">
     <h1>Элементы теории графов</h1>

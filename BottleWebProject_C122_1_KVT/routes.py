@@ -34,7 +34,7 @@ def bfs():
 @view('dfs')
 def dfs():
     return dict(
-        title='dfs',
+        title='Поиск "в глубину"',
         year=datetime.now().year
     )
 
