@@ -12,6 +12,7 @@ window.onload = function () {
 function generateMatrixBFS() {
     // Получаем количество вершин из элемента с id 'vertices-input-bfs'
     const n = parseInt(document.getElementById('vertices-input-bfs').value);
+    updateStartInputMaxValueBasedOnVertices(n);
     let matrix = '<table>';
 
     // Создание заголовка таблицы с номерами вершин
@@ -47,6 +48,23 @@ function generateMatrixBFS() {
         // Обновление значения в симметричной ячейке
         document.getElementById(`cell-${colIndex}-${rowIndex}`).value = value;
     });
+}
+
+/**
+ * Обновляет максимальное значение поля начальной вершины.
+ * @param {number} verticesValue Количество вершин графа.
+ */
+function updateStartInputMaxValueBasedOnVertices(verticesValue) {
+    // Получаем текущее значение начальной вершины
+    const startValue = parseInt(document.getElementById('start-input-bfs').value);
+
+    // Устанавливаем максимальное значение начальной вершины равным значению количества вершин
+    document.getElementById('start-input-bfs').setAttribute('max', verticesValue);
+
+    // Если текущее значение начальной вершины больше нового максимального значения, корректируем его
+    if (startValue > verticesValue) {
+        document.getElementById('start-input-bfs').value = verticesValue;
+    }
 }
 
 // Функция для обработки загруженного файла
@@ -116,6 +134,7 @@ function generateRandomMatrix() {
 function displayMatrix(matrix) {
     // Устанавливаем количество вершин в поле ввода 'vertices-input-bfs'
     document.getElementById('vertices-input-bfs').value = matrix.length;
+    updateStartInputMaxValueBasedOnVertices(matrix.length);
 
     let matrixHTML = '<table>';
 

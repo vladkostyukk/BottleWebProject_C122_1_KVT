@@ -23,8 +23,8 @@
     </div>
 
     <div class="form-group">
-        <h3>Количество вершин графа:</h3>
-        <input class="input_bfs" type="number" id="vertices-input-bfs" min="3" max="10" value="3" onchange="generateMatrixBFS()" onkeydown="return false" onkeypress="return false">
+        <h3>Начальная вершина:</h3>
+        <input class="input_bfs" type="number" id="start-input-bfs" min="1" max="3" value="1" onkeydown="return false" onkeypress="return false">
     </div>
 
     <h3>Матрица смежности:</h3>
