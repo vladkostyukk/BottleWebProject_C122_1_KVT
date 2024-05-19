@@ -234,6 +234,17 @@ function displayGraph(n, matrix, graph) {
         graphElement.innerHTML = '';
     }
 
+    // Добавляем заголовок
+    const titleText = document.createElement('h3');
+
+    if (graph === '#original-graph') {
+        titleText.textContent = 'Исходный граф';
+    } else {
+        titleText.textContent = 'Остовное дерево';
+    }
+    
+    graphElement.appendChild(titleText);
+
     // Создаем SVG контейнер для отображения графа
     const width = 400;
     const height = 400;

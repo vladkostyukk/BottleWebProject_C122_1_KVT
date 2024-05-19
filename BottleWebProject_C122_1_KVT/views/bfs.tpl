@@ -45,7 +45,7 @@
     <a class="floating-button" onclick="buildGraphBFS()">Построить</a>
 
     <div class="div-graph-bfs">
-        <div id="original-graph" class="graph-bfs"></div>
-        <div id="spanning-tree-graph" class="graph-bfs"></div>
+        <div id="original-graph"></div>
+        <div id="spanning-tree-graph"></div>
     </div>
 </div>

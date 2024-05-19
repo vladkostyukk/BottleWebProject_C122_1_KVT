@@ -236,7 +236,6 @@ footer {
 
     .bfs-block-practice h2 {
         color: black;
-        font-weight: bold;
     }
 
     .bfs-block-practice h3 {
@@ -320,17 +319,19 @@ footer {
         text-decoration: none;
     }
 
-#graph-bfs {
-    width: 400px;
-    height: 400px;
-    scroll-margin-top: 20vh;
-}
-
 .div-graph-bfs {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    scroll-margin-top: 20vh;
+    margin-top: 10px;
 }
+
+    .div-graph-bfs h3 {
+        color: black;
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
 .input-file-bfs {
     position: relative;
