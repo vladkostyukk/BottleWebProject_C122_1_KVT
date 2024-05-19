@@ -102,9 +102,12 @@
                 </label>
                 <center><div id="error-message" style="display: none; color: red; font-weight: bold; font-size: 20px;"></div></center>
                 <div id="graphButtons" style="display: none;">
-                    <center><div id="network" style="width: 700px; height: 400px; border: 3px solid #2162a4; margin-top: 15px;"></div></center>
+                    <center><div id="network" style="width: 800px; height: 600px; border: 3px solid #2162a4; margin-top: 15px;"></div></center>
                     <center><button type="button" class="floating-button-Kruskal" onclick="saveGraphKruskal()">Сохранить граф</button>
-                    <button type="button" class="floating-button-Kruskal" style="width: 250px;" onclick="runKruskalAlgorithm()">Найти кратчайший остов</button></center>
+                    <button type="button" class="floating-button-Kruskal" style="width: 250px;" onclick="sendMatrixData()">Найти кратчайший остов</button></center>
+                </div>
+                <div id="graphminostov" style="display: none;">
+                    <center><div id="network2" style="width: 800px; height: 600px; border: 3px solid #2162a4; margin-top: 15px;"></div></center>
                 </div>
             </p>
             </form>

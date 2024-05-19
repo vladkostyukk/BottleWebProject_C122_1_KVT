@@ -73,9 +73,6 @@
     <Content Include="static\scripts\bfs.js" />
     <Content Include="static\scripts\bootstrap.js" />
     <Content Include="static\scripts\bootstrap.min.js" />
-    <Content Include="static\scripts\create_graph_kruskal.js" />
-    <Content Include="static\scripts\from_file_kruskal.js" />
-    <Content Include="static\scripts\generate_matrix_kruskal.js" />
     <Content Include="static\scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="static\scripts\jquery-1.10.2.js" />
     <Content Include="static\scripts\jquery-1.10.2.min.js" />
