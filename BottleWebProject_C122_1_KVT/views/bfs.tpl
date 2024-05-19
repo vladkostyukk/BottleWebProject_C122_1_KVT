@@ -40,12 +40,18 @@
             <span id="error-message-bfs"></span>
         </div>
     </div>
+
     <div id="matrix_bfs"></div>
 
-    <a class="floating-button" onclick="buildGraphBFS()">Построить</a>
+    <a class="floating-button" onclick="buildGraphBFS(); location.href='#div-graph-bfs'">Построить</a>
 
-    <div class="div-graph-bfs">
+    <div id="div-graph-bfs">
         <div id="original-graph"></div>
         <div id="spanning-tree-graph"></div>
+    </div>
+
+    <!-- Кнопка для сохранения матрицы в файл -->
+    <div class="save-div-bfs">
+        <a id="saveButtonBFS" class="floating-button" onclick="saveSpanningTree()">Сохранить</a>
     </div>
 </div>

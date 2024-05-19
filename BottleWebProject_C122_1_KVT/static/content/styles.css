@@ -319,15 +319,14 @@ footer {
         text-decoration: none;
     }
 
-.div-graph-bfs {
+#div-graph-bfs {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    scroll-margin-top: 20vh;
+    justify-content: space-around;
     margin-top: 10px;
 }
 
-    .div-graph-bfs h3 {
+    #div-graph-bfs h3 {
         color: black;
         text-align: center;
         margin-bottom: 20px;
@@ -383,6 +382,14 @@ footer {
     font-family: Verdana, sans-serif;
     color: black;
 }
+
+.save-div-bfs {
+    text-align: center;
+}
+
+    .save-div-bfs a {
+        display: none;
+    }
 
 .body_kruskal {
     font-size: 18px;

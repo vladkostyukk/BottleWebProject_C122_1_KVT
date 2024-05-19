@@ -178,14 +178,17 @@ function displayMatrix(matrix) {
     document.getElementById('matrix_bfs').innerHTML = matrixHTML;
 }
 
+originalMatrixBFS = [];
+startNodeBFS = 0;
+
 // Функция для построения графа и запуска алгоритма BFS
 function buildGraphBFS() {
     // Получаем количество вершин и начальную вершину из полей ввода
     const n = parseInt(document.getElementById('vertices-input-bfs').value);
-    const startNode = parseInt(document.getElementById('start-input-bfs').value) - 1; // Номер начальной вершины
+    startNode = parseInt(document.getElementById('start-input-bfs').value) - 1;
 
     // Создаем матрицу смежности и заполняем ее значениями из ячеек
-    const matrix = [];
+    matrix = [];
     for (let i = 0; i < n; i++) {
         matrix.push([]);
         for (let j = 0; j < n; j++) {
@@ -197,11 +200,14 @@ function buildGraphBFS() {
     displayGraph(n, matrix, '#original-graph');
 
     // Запускаем алгоритм BFS для поиска остовного дерева
-    runBFSAlgorithm(n, matrix, startNode);
+    runBFSAlgorithm(matrix, startNode)
+        .then(spanningTree => {
+            displayGraph(n, spanningTree, '#spanning-tree-graph');
+        });
 }
 
 // Функция для запуска алгоритма поиска в ширину (BFS)
-function runBFSAlgorithm(n, matrix, startNode) {
+function runBFSAlgorithm(matrix, startNode) {
     // Формируем данные для отправки на сервер
     const data = {
         matrix, // Матрица смежности
@@ -209,7 +215,7 @@ function runBFSAlgorithm(n, matrix, startNode) {
     };
 
     // Отправляем POST-запрос на сервер
-    fetch('/run_bfs_algorithm', {
+    return fetch('/run_bfs_algorithm', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -219,7 +225,7 @@ function runBFSAlgorithm(n, matrix, startNode) {
         // Обрабатываем полученный ответ в формате JSON
         .then(response => response.json())
         // Выводим граф остовного дерева на веб-страницу
-        .then(data => displayGraph(n, data.spanningTree, '#spanning-tree-graph'))
+        .then(data => data.spanningTree)
         // Обрабатываем возможные ошибки
         .catch(error => console.error('Error:', error));
 }
@@ -239,6 +245,7 @@ function displayGraph(n, matrix, graph) {
 
     if (graph === '#original-graph') {
         titleText.textContent = 'Исходный граф';
+        originalMatrixBFS = matrix;
     } else {
         titleText.textContent = 'Остовное дерево';
     }
@@ -290,4 +297,27 @@ function displayGraph(n, matrix, graph) {
         .attr('text-anchor', 'middle')
         .attr('dy', '.3em')
         .attr('fill', 'white');
+
+    document.getElementById('saveButtonBFS').style.display = 'inline-block';
+}
+
+// Функция сохранения остовного дерева
+function saveSpanningTree() {
+    // Запускаем алгоритм BFS для поиска остовного дерева
+    runBFSAlgorithm(matrix, startNode)
+        .then(spanningTree => {
+            // Преобразуем остовное дерево в строку с пробелами между элементами и новыми строками
+            const matrixString = spanningTree.map(row => row.join(' ')).join('\n');
+
+            // Создаем элемент <a> для скачивания матрицы в виде текстового файла
+            const element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(matrixString)); // Устанавливаем ссылку и кодировку
+            element.setAttribute('download', 'adjacency_matrix.txt'); // Устанавливаем имя файла для скачивания
+
+            document.body.appendChild(element); // Добавляем элемент в DOM
+
+            element.click(); // Производим программный клик для запуска скачивания
+
+            document.body.removeChild(element); // Удаляем элемент из DOM после скачивания
+        });
 }
