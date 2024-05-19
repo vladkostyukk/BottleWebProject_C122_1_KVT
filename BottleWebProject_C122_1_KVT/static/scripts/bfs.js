@@ -178,11 +178,14 @@ function displayMatrix(matrix) {
     document.getElementById('matrix_bfs').innerHTML = matrixHTML;
 }
 
+// Функция для построения графа и запуска алгоритма BFS
 function buildGraphBFS() {
+    // Получаем количество вершин и начальную вершину из полей ввода
     const n = parseInt(document.getElementById('vertices-input-bfs').value);
-    const matrix = [];
+    const startNode = parseInt(document.getElementById('start-input-bfs').value) - 1; // Номер начальной вершины
 
-    // Считываем значения из ячеек матрицы
+    // Создаем матрицу смежности и заполняем ее значениями из ячеек
+    const matrix = [];
     for (let i = 0; i < n; i++) {
         matrix.push([]);
         for (let j = 0; j < n; j++) {
@@ -190,13 +193,51 @@ function buildGraphBFS() {
         }
     }
 
-    // Удаляем предыдущие элементы графа, если они были
-    d3.select('svg').remove();
+    // Отображаем исходный граф на веб-странице
+    displayGraph(n, matrix, '#original-graph');
+
+    // Запускаем алгоритм BFS для поиска остовного дерева
+    runBFSAlgorithm(n, matrix, startNode);
+}
+
+// Функция для запуска алгоритма поиска в ширину (BFS)
+function runBFSAlgorithm(n, matrix, startNode) {
+    // Формируем данные для отправки на сервер
+    const data = {
+        matrix, // Матрица смежности
+        startNode // Начальная вершина
+    };
+
+    // Отправляем POST-запрос на сервер
+    fetch('/run_bfs_algorithm', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+        // Обрабатываем полученный ответ в формате JSON
+        .then(response => response.json())
+        // Выводим граф остовного дерева на веб-страницу
+        .then(data => displayGraph(n, data.spanningTree, '#spanning-tree-graph'))
+        // Обрабатываем возможные ошибки
+        .catch(error => console.error('Error:', error));
+}
+
+// Функция для отображения графа на странице
+function displayGraph(n, matrix, graph) {
+    // Находим элемент графа по селектору
+    const graphElement = document.querySelector(graph);
+
+    // Если элемент найден, очищаем его содержимое
+    if (graphElement) {
+        graphElement.innerHTML = '';
+    }
 
     // Создаем SVG контейнер для отображения графа
     const width = 400;
     const height = 400;
-    const svg = d3.select('#graph').append('svg')
+    const svg = d3.select(graph).append('svg')
         .attr('width', width)
         .attr('height', height);
 

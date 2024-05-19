@@ -320,12 +320,16 @@ footer {
         text-decoration: none;
     }
 
-#graph {
-    width: 500px;
-    height: 500px;
-    margin-left: auto;
-    margin-right: auto;
+#graph-bfs {
+    width: 400px;
+    height: 400px;
     scroll-margin-top: 20vh;
+}
+
+.div-graph-bfs {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .input-file-bfs {

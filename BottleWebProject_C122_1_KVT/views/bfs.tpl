@@ -42,7 +42,10 @@
     </div>
     <div id="matrix_bfs"></div>
 
-    <a class="floating-button" onclick="buildGraphBFS(); location.href='#graph';">Построить</a>
+    <a class="floating-button" onclick="buildGraphBFS()">Построить</a>
 
-    <div id="graph"></div>
+    <div class="div-graph-bfs">
+        <div id="original-graph" class="graph-bfs"></div>
+        <div id="spanning-tree-graph" class="graph-bfs"></div>
+    </div>
 </div>
