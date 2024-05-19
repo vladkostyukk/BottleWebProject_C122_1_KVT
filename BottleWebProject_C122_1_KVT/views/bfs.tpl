@@ -1,7 +1,9 @@
 % rebase('layout.tpl', title=title, year=year)
 
+<!-- Задний фон -->
 <div class="bfs-background"</div>
 
+<!-- Блок теории -->
 <div class="bfs-block-theory">
     <h1>Алгоритм поиска &laquo;в ширину&raquo;</h1>
     <div class="bfs-div-theory">
@@ -14,14 +16,17 @@
     </div>
 </div>
 
+<!-- Блок практики -->
 <div class="bfs-block-practice">
     <h2><b>Попробуйте сами!</b></h2>
 
+    <!-- Форма для выбора количества вершин графа -->
     <div class="form-group">
         <h3>Количество вершин графа:</h3>
         <input class="input_bfs" type="number" id="vertices-input-bfs" min="3" max="10" value="3" onchange="generateMatrixBFS()" onkeydown="return false" onkeypress="return false">
     </div>
 
+    <!-- Форма для выбора начальной вершины -->
     <div class="form-group">
         <h3>Начальная вершина:</h3>
         <input class="input_bfs" type="number" id="start-input-bfs" min="1" max="3" value="1" onkeydown="return false" onkeypress="return false">
@@ -29,6 +34,7 @@
 
     <h3>Матрица смежности:</h3>
 
+    <!-- Кнопки для генерации случайной матрицы или загрузки из файла -->
     <div style="display: flex; align-items: left;">
         <a class="floating-button" onclick="generateRandomMatrix()" style="width: 170px;">Сгенерировать</a>
 
@@ -41,12 +47,16 @@
         </div>
     </div>
 
+    <!-- Место для отображения матрицы смежности -->
     <div id="matrix_bfs"></div>
 
+    <!-- Кнопка для построения графа на основе матрицы смежности -->
     <a class="floating-button" onclick="buildGraphBFS(); location.href='#div-graph-bfs'">Построить</a>
 
     <div id="div-graph-bfs">
+        <!-- Место для отображения исходного графа -->
         <div id="original-graph"></div>
+        <!-- Место для отображения остовного дерева графа на основе BFS -->
         <div id="spanning-tree-graph"></div>
     </div>
 
