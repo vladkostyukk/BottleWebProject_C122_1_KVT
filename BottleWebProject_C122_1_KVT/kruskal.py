@@ -1,40 +1,69 @@
 from bottle import post, request
-import re
-import datetime
+import json
 
-@post('/home', method='post')
+@post('/home')
 def my_form():
-    try:
-        quest = request.forms.get('QUEST')
-        mail = request.forms.get('ADRESS')
-        username = request.forms.get('USERNAME')  # Получаем юзернейм из формы
+    data = request.json
+    matrix = data.get('matrix')
+    vertex_count = data.get('vertexCount')
 
-        # Проверка заполненности поля формы
-        if not quest or not mail or not username:
-            raise ValueError("Please fill in all fields of the form.")
+    if matrix is None or vertex_count is None:
+        return {'error': 'Invalid input'}
 
-        # Паттерн для адреса электронной почты (проверка на соответствие формату)
-        pattern = r"^[^@<>\/\\\[\]]{1}[\w\.-]+@[\w\.-]+\.[a-zA-Z]{2,}$"
+    mst_matrix = kruskal_algorithm(matrix, vertex_count)
 
-        if len(mail) > 50:
-            raise ValueError("Email address length should not exceed 50 characters.")
+    # print(f"MST Matrix: {mst_matrix}")
 
-        if not re.match(pattern, mail):
-            raise ValueError("Please provide a valid email address.")
+    return {'mst_matrix': mst_matrix}
 
-        # Проверка на не более 5 символов после последней точки
-        if len(mail.split('.')[-1]) > 5:
-            raise ValueError("No more than 5 characters are allowed after the last dot.")
+def kruskal_algorithm(matrix, vertex_count):
+    # РЎРѕР·РґР°РЅРёРµ СЃРїРёСЃРєР° СЂС‘Р±РµСЂ
+    edges = []
+    for i in range(vertex_count):
+        for j in range(i + 1, vertex_count):
+            if matrix[i][j] > 0:
+                edges.append((matrix[i][j], i, j))
 
-        # Получение текущей системной даты
-        current_date = datetime.datetime.now().strftime("%Y-%m-%d")
+    # РЎРѕСЂС‚РёСЂРѕРІРєР° СЂС‘Р±РµСЂ РїРѕ РІРµСЃСѓ
+    edges.sort()
 
-        # Формирование сообщения с обращением к юзернейму
-        message = "Thanks, %s! Your question: %s. The answer will be sent to the email %s. Access Date: %s" % (username, quest, mail, current_date)
+    # РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ Union-Find СЃС‚СЂСѓРєС‚СѓСЂС‹
+    uf = UnionFind(vertex_count)
+    mst = []
 
-        return message
-    except ValueError as e:
-        return str(e)
-    except Exception as e:
-        return "An error occurred. Please try again later."
+    # РџРѕСЃС‚СЂРѕРµРЅРёРµ MST
+    for weight, u, v in edges:
+        if uf.find(u) != uf.find(v):
+            uf.union(u, v)
+            mst.append((u, v, weight))
+
+
+    # РЎРѕР·РґР°РЅРёРµ РјР°С‚СЂРёС†С‹ РјРёРЅРёРјР°Р»СЊРЅРѕРіРѕ РѕСЃС‚РѕРІР°
+    mst_matrix = [[0] * vertex_count for _ in range(vertex_count)]
+    for u, v, weight in mst:
+        mst_matrix[u][v] = weight
+        mst_matrix[v][u] = weight
+
+    return mst_matrix
+
+class UnionFind:
+    def __init__(self, n):
+        self.parent = list(range(n))
+        self.rank = [0] * n
+
+    def find(self, u):
+        if self.parent[u] != u:
+            self.parent[u] = self.find(self.parent[u])
+        return self.parent[u]
+
+    def union(self, u, v):
+        root_u = self.find(u)
+        root_v = self.find(v)
+        if root_u != root_v:
+            if self.rank[root_u] > self.rank[root_v]:
+                self.parent[root_v] = root_u
+            else:
+                self.parent[root_u] = root_v
+                if self.rank[root_u] == self.rank[root_v]:
+                    self.rank[root_v] += 1
 
