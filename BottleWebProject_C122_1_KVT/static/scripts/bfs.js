@@ -31,7 +31,7 @@ function generateMatrixBFS() {
             if (i === j) {
                 matrix += `<td><input class="input_bfs" type="number" min="0" value="0" id="cell-${i}-${j}" readonly></td>`;
             } else {
-                matrix += `<td><input class="input_bfs" type="number" value="0" min="0" max="1" id="cell-${i}-${j}"></td>`;
+                matrix += `<td><input class="input_bfs" type="number" value="0" min="0" max="1" id="cell-${i}-${j}" onkeydown="return false" onkeypress="return false"></td>`;
             }
         }
         matrix += "</tr>";
@@ -168,7 +168,7 @@ function displayMatrix(matrix) {
                 matrixHTML += `<td><input class="input_bfs" type="number" value="${matrix[i][j]}" min="0" max="1" id="cell-${i}-${j}" readonly></td>`;
             } else {
                 // Для остальных элементов отображаем изменяемые значения
-                matrixHTML += `<td><input class="input_bfs" type="number" value="${matrix[i][j]}" min="0" max="1" id="cell-${i}-${j}"></td>`;
+                matrixHTML += `<td><input class="input_bfs" type="number" value="${matrix[i][j]}" min="0" max="1" id="cell-${i}-${j}" onkeydown="return false" onkeypress="return false"></td>`;
             }
         }
         matrixHTML += "</tr>";
@@ -313,7 +313,7 @@ function saveSpanningTree() {
             // Создаем элемент <a> для скачивания матрицы в виде текстового файла
             const element = document.createElement('a');
             element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(matrixString)); // Устанавливаем ссылку и кодировку
-            element.setAttribute('download', 'adjacency_matrix.txt'); // Устанавливаем имя файла для скачивания
+            element.setAttribute('download', 'Adjacency matrix BFS.txt'); // Устанавливаем имя файла для скачивания
 
             document.body.appendChild(element); // Добавляем элемент в DOM
 
