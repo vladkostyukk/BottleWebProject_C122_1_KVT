@@ -10,19 +10,19 @@ def run_bfs_algorithm():
     start_node = data.get('startNode')  # Получаем стартовую вершину из данных
 
     # Вызываем функцию для поиска остовного дерева по алгоритму BFS
-    result = bfs_spanning_tree(matrix, start_node)
-    return result
+    # Возвращаем матрицу остовного дерева в формате JSON
+    return {'spanningTree': bfs_spanning_tree(matrix, start_node)}
 
 # Функция для поиска остовного дерева по алгоритму BFS
 def bfs_spanning_tree(matrix, start_node):
     n = len(matrix)  # Определяем размер матрицы (количество вершин)
     visited = [False] * n  # Список для отслеживания посещенных вершин
     spanning_tree = [[0 for _ in range(n)] for _ in range(n)]  # Инициализация матрицы остовного дерева
-        
+
     queue = deque()  # Инициализация очереди для BFS
     queue.append(start_node)  # Добавляем стартовую вершину в очередь
     visited[start_node] = True  # Помечаем стартовую вершину как посещенную
-        
+
     # Пока очередь не пуста
     while queue:
         current_node = queue.popleft()  # Извлекаем текущую вершину из очереди
@@ -32,5 +32,5 @@ def bfs_spanning_tree(matrix, start_node):
                 visited[neighbor] = True  # Помечаем соседнюю вершину как посещенную
                 spanning_tree[current_node][neighbor] = 1  # Устанавливаем вес ребра в матрицу остовного дерева
                 spanning_tree[neighbor][current_node] = 1  # Устанавливаем вес ребра в матрицу остовного дерева (для неориентированного графа)
-        
-    return {'spanningTree': spanning_tree}  # Возвращаем матрицу остовного дерева в формате JSON
+                
+    return spanning_tree  # Возвращаем матрицу остовного дерева
