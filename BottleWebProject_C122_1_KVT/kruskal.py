@@ -1,40 +1,73 @@
-from bottle import post, request
-import re
-import datetime
+from bottle import post, request 
+import json  
 
-@post('/home', method='post')
+@post('/home')
 def my_form():
-    try:
-        quest = request.forms.get('QUEST')
-        mail = request.forms.get('ADRESS')
-        username = request.forms.get('USERNAME')  # �������� �������� �� �����
+    # Получение данных из JSON-запроса
+    data = request.json  # Извлечение JSON-данных из HTTP-запроса
+    matrix = data.get('matrix')  # Извлечение матрицы из данных запроса
+    vertex_count = data.get('vertexCount')  # Извлечение количества вершин из данных запроса
 
-        # �������� ������������� ���� �����
-        if not quest or not mail or not username:
-            raise ValueError("Please fill in all fields of the form.")
+    mst_matrix, mst_weight = kruskal_algorithm(matrix, vertex_count)
 
-        # ������� ��� ������ ����������� ����� (�������� �� ������������ �������)
-        pattern = r"^[^@<>\/\\\[\]]{1}[\w\.-]+@[\w\.-]+\.[a-zA-Z]{2,}$"
+    return {'mst_matrix': mst_matrix, 'mst_weight': mst_weight}
 
-        if len(mail) > 50:
-            raise ValueError("Email address length should not exceed 50 characters.")
 
-        if not re.match(pattern, mail):
-            raise ValueError("Please provide a valid email address.")
+# Алгоритм Краскала для построения минимального остова
+def kruskal_algorithm(matrix, vertex_count):
+    # Создание списка рёбер
+    edges = []
+    for i in range(vertex_count):
+        for j in range(i + 1, vertex_count):
+            if matrix[i][j] > 0:
+                edges.append((matrix[i][j], i, j))  # Добавление ребра в список, если оно существует
 
-        # �������� �� �� ����� 5 �������� ����� ��������� �����
-        if len(mail.split('.')[-1]) > 5:
-            raise ValueError("No more than 5 characters are allowed after the last dot.")
+    edges.sort()  # Сортировка списка рёбер по возрастанию веса
 
-        # ��������� ������� ��������� ����
-        current_date = datetime.datetime.now().strftime("%Y-%m-%d")
+    uf = UnionFind(vertex_count)  # Создание объекта структуры Union-Find
+    mst = []  # Список рёбер минимального остова
+    mst_weight = 0  # Вес минимального остова
 
-        # ������������ ��������� � ���������� � ���������
-        message = "Thanks, %s! Your question: %s. The answer will be sent to the email %s. Access Date: %s" % (username, quest, mail, current_date)
+    # Построение MST
+    for weight, u, v in edges:
+        # Проверка наличия цикла
+        if uf.find(u) != uf.find(v):  # Если вершины u и v не находятся в одном множестве
+            uf.union(u, v)  # Объединение множеств вершин u и v
+            mst.append((u, v, weight))  # Добавление ребра к минимальному остову
+            mst_weight += weight  # Обновление веса минимального остова
 
-        return message
-    except ValueError as e:
-        return str(e)
-    except Exception as e:
-        return "An error occurred. Please try again later."
+    # Создание матрицы минимального остова
+    mst_matrix = [[0] * vertex_count for _ in range(vertex_count)]  # Создание нулевой матрицы
+    for u, v, weight in mst:
+        mst_matrix[u][v] = weight  # Установка веса ребра в матрице
+        mst_matrix[v][u] = weight  # Матрица симметрична
 
+    return mst_matrix, mst_weight  # Возвращение матрицы остова и веса остова
+
+
+# Класс UnionFind для эффективного определения связей между вершинами графа и для обнаружения циклов в графе при добавлении ребер
+class UnionFind:
+    def __init__(self, n):
+        self.parent = list(range(n))  # Инициализация списка родительских элементов
+        self.rank = [0] * n  # Инициализация списка рангов
+
+    # Метод find для поиска корня
+    def find(self, u):
+        if self.parent[u] != u:  # Если узел не является корнем своего дерева
+            self.parent[u] = self.find(self.parent[u])  # Присваивание корню прямой ссылки на него
+        return self.parent[u]  
+ 
+    # Метод union для объединения двух подмножеств
+    def union(self, u, v):
+        root_u = self.find(u)  # Нахождение корня дерева для узла u
+        root_v = self.find(v)  # Нахождение корня дерева для узла v
+        if root_u != root_v:  # Если узлы принадлежат разным деревьям
+            # условие проверяет ранги (глубину) деревьев root_u и root_v. Если root_u имеет больший ранг, чем root_v, то поддерево, связанное с root_v, становится поддеревом под root_u. 
+            if self.rank[root_u] > self.rank[root_v]:
+                self.parent[root_v] = root_u  # Присваивание корню v корня u
+            else:
+                # В противном случае поддерево root_u становится поддеревом под root_v.
+                self.parent[root_u] = root_v  # Присваивание корню u корня v
+                # Если ранги root_u и root_v равны, то выбирается любой из них, и ранг поддерева, в который он был включен, увеличивается на 1.
+                if self.rank[root_u] == self.rank[root_v]:
+                    self.rank[root_v] += 1  # Увеличение ранга корня поддерева
