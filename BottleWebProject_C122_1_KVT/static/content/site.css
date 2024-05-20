@@ -72,16 +72,24 @@ input[type="checkbox"].input-validation-error {
     padding: 5px 5px;
 }
 
+.dfs-card .dfs-card-graph {
+    flex: 1 1 auto;
+    padding: 5px 5px;
+    height: 300px;
+    width: 100%;
+    display: contents;
+}
+
 .dfs-card .dfs-column {
     width: 50%;
     display: flex;
-    align-items: center;
+    align-items: start;
 }
 
 
 .dfs-card .dfs-column.dfs-column-right {
     flex-direction: column;
-    justify-content: flex-end;
+    align-items: center;
 }
 
 .dfs-card .dfs-card-title {
@@ -115,4 +123,10 @@ input[type="checkbox"].input-validation-error {
 
 .dfs-card .dfs-card-buttons .btn {
     margin-right: 5px;
+}
+
+.dfs-card .dfs-column-right .dfs-card-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }

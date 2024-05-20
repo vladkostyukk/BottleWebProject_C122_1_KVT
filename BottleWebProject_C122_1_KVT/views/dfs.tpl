@@ -30,25 +30,29 @@
                 <h1 class="dfs-card-title">Попробуйте сами!</h1>
                 <p class="dfs-card-text">Количество вершин:</p>
                 <div>
-                    <input type="number" min=4 max=10 value=4 name="count-vertex" id="dfs-count-vertex" class="form-control"/>
+                    <input type="number" min=4 max=10 value=4 name="count-vertex" id="dfs-count-vertex" class="form-control"  onkeypress="return false" />
                 </div>
                 <p class="dfs-card-text">Введите начальную вершину:</p>
                 <div>
-                    <input type="number" min=1 max=10 value=1 name="vertex" class="form-control" />
+                    <input type="number" min=0 max=10 value=0 name="start-vertex" class="form-control" onkeypress="return false" />
                 </div>
                 <p class="dfs-card-text">Матрица смежности:</p>
-                <div id="dfs-matrix-table">
+                <div id="dfs-matrix-table" name="matrix-table">
                 </div>
                 <div class="dfs-card-buttons">
-                      <button type="button" class="btn btn-success">Решить</button>
-                      <button type="button" class="btn btn-success">Сгенерировать</button>
-                      <button type="button" class="btn btn-success">Загрузить</button>
+                      <button id="btn-result" type="button" class="floating-button">Решить</button>
+                      <button id="btn-generate" type="button" class="floating-button" style="width: 170px;">Сгенерировать</button>
+                      <button id="btn-upload" type="button" class="floating-button">Загрузить</button>
                 </div>
               </div>
           </div>
-          <div class="col-md-6 dfs-column dfs-column-right">
+          <div id="result-panel" class="col-md-6 dfs-column dfs-column-right hide">
+            <h1 class="dfs-card-title">Диаграмма графа</h1>
+            <div id="diagram-source" class="dfs-card-graph"></div>
+            <h1 class="dfs-card-title">Остовной граф</h1>
+            <div id="diagram-result" class="dfs-card-graph"></div>
             <div class="dfs-card-buttons">
-                <button type="button" class="btn btn-success">Сохранить</button>
+                <button id="btn-save" type="button" class="floating-button">Сохранить</button>
             </div>
           </div>
       </div>
