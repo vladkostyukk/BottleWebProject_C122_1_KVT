@@ -10,11 +10,9 @@ def my_form():
     if matrix is None or vertex_count is None:
         return {'error': 'Invalid input'}
 
-    mst_matrix = kruskal_algorithm(matrix, vertex_count)
+    mst_matrix, mst_weight = kruskal_algorithm(matrix, vertex_count)
 
-    # print(f"MST Matrix: {mst_matrix}")
-
-    return {'mst_matrix': mst_matrix}
+    return {'mst_matrix': mst_matrix, 'mst_weight': mst_weight}
 
 def kruskal_algorithm(matrix, vertex_count):
     # Создание списка рёбер
@@ -30,13 +28,14 @@ def kruskal_algorithm(matrix, vertex_count):
     # Инициализация Union-Find структуры
     uf = UnionFind(vertex_count)
     mst = []
+    mst_weight = 0
 
     # Построение MST
     for weight, u, v in edges:
         if uf.find(u) != uf.find(v):
             uf.union(u, v)
             mst.append((u, v, weight))
-
+            mst_weight += weight
 
     # Создание матрицы минимального остова
     mst_matrix = [[0] * vertex_count for _ in range(vertex_count)]
@@ -44,7 +43,7 @@ def kruskal_algorithm(matrix, vertex_count):
         mst_matrix[u][v] = weight
         mst_matrix[v][u] = weight
 
-    return mst_matrix
+    return mst_matrix, mst_weight
 
 class UnionFind:
     def __init__(self, n):
@@ -66,4 +65,3 @@ class UnionFind:
                 self.parent[root_u] = root_v
                 if self.rank[root_u] == self.rank[root_v]:
                     self.rank[root_v] += 1
-

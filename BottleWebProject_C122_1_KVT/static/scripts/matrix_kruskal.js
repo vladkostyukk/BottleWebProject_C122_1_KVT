@@ -1,9 +1,9 @@
-// Функция создания матрицы на экране
+// Р¤СѓРЅРєС†РёСЏ СЃРѕР·РґР°РЅРёСЏ РјР°С‚СЂРёС†С‹ РЅР° СЌРєСЂР°РЅРµ
 function generateMatrixKruskal() {
     const n = parseInt(document.getElementById('vertices-input').value);
     let matrix = '<table>';
 
-    // Создаем верхнюю шапку с номерами столбцов 
+    // РЎРѕР·РґР°РµРј РІРµСЂС…РЅСЋСЋ С€Р°РїРєСѓ СЃ РЅРѕРјРµСЂР°РјРё СЃС‚РѕР»Р±С†РѕРІ 
     matrix += '<tr><td></td>';
     for (let j = 0; j < n; j++) {
         matrix += `<td class="bfs-td" style="height: 30px; text-align: center;">${j}</td>`;
@@ -11,12 +11,12 @@ function generateMatrixKruskal() {
     matrix += '</tr>';
 
     for (let i = 0; i < n; i++) {
-        matrix += `<tr><td class="bfs-td" style="width: 30px; text-align: center;">${i}</td>`; // Создаем боковую шапку с номерами строк 
+        matrix += `<tr><td class="bfs-td" style="width: 30px; text-align: center;">${i}</td>`; // РЎРѕР·РґР°РµРј Р±РѕРєРѕРІСѓСЋ С€Р°РїРєСѓ СЃ РЅРѕРјРµСЂР°РјРё СЃС‚СЂРѕРє 
         for (let j = 0; j < n; j++) {
-            if (i === j) { // Для диагональных элементов
-                matrix += `<td><input class="input_bfs rounded-input" type="number" min="0" value="0" id="cell-${i}-${j}" style="width: 80px;" readonly></td>`;
+            if (i === j) { // Р”Р»СЏ РґРёР°РіРѕРЅР°Р»СЊРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ
+                matrix += `<td><input class="input_bfs rounded-input" type="number" min="0" max="100" value="0" id="cell-${i}-${j}" style="width: 80px;" readonly oninput="this.value = Math.min(Math.max(this.value, 0), 100)"></td>`;
             } else {
-                matrix += `<td><input class="input_bfs rounded-input" type="number" min="0" value="0" id="cell-${i}-${j}" style="width: 80px;"></td>`;
+                matrix += `<td><input class="input_bfs rounded-input" type="number" min="0" max="100" value="0" id="cell-${i}-${j}" style="width: 80px;" oninput="this.value = Math.min(Math.max(this.value, 0), 100)"></td>`;
             }
         }
         matrix += "</tr>";
@@ -25,21 +25,21 @@ function generateMatrixKruskal() {
     matrix += '</table>';
     document.getElementById('matrix_kruskal').innerHTML = matrix;
 
-    // Добавляем обработчик событий для изменения значений в ячейках
+    // Р”РѕР±Р°РІР»СЏРµРј РѕР±СЂР°Р±РѕС‚С‡РёРє СЃРѕР±С‹С‚РёР№ РґР»СЏ РёР·РјРµРЅРµРЅРёСЏ Р·РЅР°С‡РµРЅРёР№ РІ СЏС‡РµР№РєР°С…
     var inputs = document.querySelectorAll('.input_bfs');
     inputs.forEach(input => {
         input.addEventListener('change', function (event) {
-            // Получаем значение из измененной ячейки
+            // РџРѕР»СѓС‡Р°РµРј Р·РЅР°С‡РµРЅРёРµ РёР· РёР·РјРµРЅРµРЅРЅРѕР№ СЏС‡РµР№РєРё
             var value = event.target.value;
-            // Получаем индексы строки и столбца измененной ячейки
+            // РџРѕР»СѓС‡Р°РµРј РёРЅРґРµРєСЃС‹ СЃС‚СЂРѕРєРё Рё СЃС‚РѕР»Р±С†Р° РёР·РјРµРЅРµРЅРЅРѕР№ СЏС‡РµР№РєРё
             var rowIndex = parseInt(event.target.id.split('-')[1]);
             var colIndex = parseInt(event.target.id.split('-')[2]);
-            // Если измененная ячейка находится на диагонали, оставляем ее значение равным нулю и прерываем обработку
+            // Р•СЃР»Рё РёР·РјРµРЅРµРЅРЅР°СЏ СЏС‡РµР№РєР° РЅР°С…РѕРґРёС‚СЃСЏ РЅР° РґРёР°РіРѕРЅР°Р»Рё, РѕСЃС‚Р°РІР»СЏРµРј РµРµ Р·РЅР°С‡РµРЅРёРµ СЂР°РІРЅС‹Рј РЅСѓР»СЋ Рё РїСЂРµСЂС‹РІР°РµРј РѕР±СЂР°Р±РѕС‚РєСѓ
             if (rowIndex === colIndex) {
                 event.target.value = 0;
                 return;
             }
-            // Устанавливаем значение в соответствующей симметричной ячейке
+            // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј Р·РЅР°С‡РµРЅРёРµ РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РµР№ СЃРёРјРјРµС‚СЂРёС‡РЅРѕР№ СЏС‡РµР№РєРµ
             document.getElementById(`cell-${colIndex}-${rowIndex}`).value = value;
         });
     });
@@ -47,14 +47,15 @@ function generateMatrixKruskal() {
 
 
 
-// Функция построения графа
+// Р¤СѓРЅРєС†РёСЏ РїРѕСЃС‚СЂРѕРµРЅРёСЏ РіСЂР°С„Р°
 function buildGraphKruskal() {
     var vertexCount = parseInt(document.getElementById("vertices-input").value);
     var graphData = { nodes: [], edges: [] };
     const errorMessageElement = document.getElementById('error-message');
+    const connectMessageElement = document.getElementById('connect-message');
 
     for (var i = 0; i < vertexCount; i++) {
-        graphData.nodes.push({ id: i, label: String(i), shape: "circle", size: 40 }); // увеличиваем размер узлов до 40
+        graphData.nodes.push({ id: i, label: String(i), shape: "circle", size: 40 });
     }
 
     for (var i = 0; i < vertexCount; i++) {
@@ -68,10 +69,19 @@ function buildGraphKruskal() {
                     title: String(weight),
                     smooth: { enabled: false },
                     arrows: { to: { enabled: false } },
-                    width: 2 // увеличиваем толщину ребер
+                    width: 2
                 });
             }
         }
+    }
+
+    if (!isGraphConnected(vertexCount, graphData.edges)) {
+        connectMessageElement.style.display = 'block';
+        document.getElementById('graphButtons').style.display = 'none';
+        connectMessageElement.innerHTML = "Р“СЂР°С„ РЅРµСЃРІСЏР·РЅС‹Р№!";
+        return;
+    } else {
+        connectMessageElement.style.display = 'none';
     }
 
     var container = document.getElementById("network");
@@ -80,7 +90,7 @@ function buildGraphKruskal() {
     var options = {
         layout: {
             improvedLayout: true,
-            randomSeed: 2, // фиксируем начальное положение узлов
+            randomSeed: 2,
             clusterThreshold: 150,
             hierarchical: { enabled: false }
         },
@@ -98,7 +108,7 @@ function buildGraphKruskal() {
             stabilization: {
                 enabled: true,
                 iterations: 1000,
-                fit: true // автоматически подгонять граф к контейнеру
+                fit: true
             },
             minVelocity: 0.75,
             maxVelocity: 50
@@ -106,7 +116,7 @@ function buildGraphKruskal() {
         interaction: { navigationButtons: true, keyboard: true },
         nodes: {
             shape: "circle",
-            size: 40, // увеличиваем размер узлов до 40
+            size: 40,
             font: { size: 20, face: "Arial", bold: { size: 14, vadjust: 0 } },
             margin: 20,
             borderWidth: 2,
@@ -127,63 +137,114 @@ function buildGraphKruskal() {
     };
 
     var network = new vis.Network(container, graphData, options);
-    network.fit(); // автоматически масштабируем граф
+    network.fit();
     document.getElementById('graphminostov').style.display = 'none';
     document.getElementById('graphButtons').style.display = 'block';
     errorMessageElement.style.display = 'none';
 }
 
+function isGraphConnected(vertexCount, edges) {
+    var adjList = {};
+    for (var i = 0; i < vertexCount; i++) {
+        adjList[i] = [];
+    }
+
+    edges.forEach(edge => {
+        adjList[edge.from].push(edge.to);
+        adjList[edge.to].push(edge.from);
+    });
+
+    var visited = new Array(vertexCount).fill(false);
+    var stack = [0];
+    visited[0] = true;
+    var visitedCount = 1;
+
+    while (stack.length > 0) {
+        var node = stack.pop();
+        adjList[node].forEach(neighbor => {
+            if (!visited[neighbor]) {
+                visited[neighbor] = true;
+                visitedCount++;
+                stack.push(neighbor);
+            }
+        });
+    }
+
+    return visitedCount === vertexCount;
+}
 
 
-// Функция генерации матрицы
+// Р¤СѓРЅРєС†РёСЏ РіРµРЅРµСЂР°С†РёРё РјР°С‚СЂРёС†С‹
 function generationMatrixKruskal() {
     const minVertices = 3;
     const maxVertices = 9;
     const errorMessageElement = document.getElementById('error-message');
-    let vertexCount = Math.floor(Math.random() * (maxVertices - minVertices + 1)) + minVertices;
-    while (vertexCount < minVertices) {
+    let vertexCount;
+
+    function generationMatrix2() {
         vertexCount = Math.floor(Math.random() * (maxVertices - minVertices + 1)) + minVertices;
-    }
-    document.getElementById('vertices-input').value = vertexCount;
-    generateMatrixKruskal(); // Сначала создаем пустую матрицу
+        document.getElementById('vertices-input').value = vertexCount;
+        generateMatrixKruskal(); // РЎРЅР°С‡Р°Р»Р° СЃРѕР·РґР°РµРј РїСѓСЃС‚СѓСЋ РјР°С‚СЂРёС†Сѓ
 
-    // Генерация случайных весов для ребер
-    for (let i = 0; i < vertexCount; i++) {
-        // Хранит количество связей для каждой вершины
-        const connections = new Array(vertexCount).fill(0);
+        // Р“РµРЅРµСЂР°С†РёСЏ СЃР»СѓС‡Р°Р№РЅС‹С… РІРµСЃРѕРІ РґР»СЏ СЂРµР±РµСЂ
+        const connections = new Array(vertexCount).fill(0).map(() => new Set());
 
-        for (let j = i + 1; j < vertexCount; j++) {
-            // Решаем случайным образом, назначать ли вес для ребра
-            if (Math.random() < 0.5 && connections[i] < 3 && connections[j] < 3) { // 50% вероятность назначения веса и проверка количества связей
+        for (let i = 0; i < vertexCount; i++) {
+            for (let j = i + 1; j < vertexCount; j++) {
+                if (Math.random() < 0.5 && connections[i].size < 3 && connections[j].size < 3) { // 50% РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РЅР°Р·РЅР°С‡РµРЅРёСЏ РІРµСЃР° Рё РїСЂРѕРІРµСЂРєР° РєРѕР»РёС‡РµСЃС‚РІР° СЃРІСЏР·РµР№
+                    const weight = Math.floor(Math.random() * 100) + 1;
+                    document.getElementById(`cell-${i}-${j}`).value = weight;
+                    document.getElementById(`cell-${j}-${i}`).value = weight; // РћР±РµСЃРїРµС‡РёРІР°РµРј СЃРёРјРјРµС‚СЂРёСЋ РјР°С‚СЂРёС†С‹
+                    connections[i].add(j);
+                    connections[j].add(i);
+                } else {
+                    document.getElementById(`cell-${i}-${j}`).value = 0;
+                    document.getElementById(`cell-${j}-${i}`).value = 0; // РћР±РµСЃРїРµС‡РёРІР°РµРј СЃРёРјРјРµС‚СЂРёСЋ РјР°С‚СЂРёС†С‹
+                }
+            }
+        }
+
+        // РџСЂРѕРІРµСЂРєР° Рё РёСЃРїСЂР°РІР»РµРЅРёРµ РёР·РѕР»РёСЂРѕРІР°РЅРЅС‹С… РІРµСЂС€РёРЅ
+        for (let i = 0; i < vertexCount; i++) {
+            if (connections[i].size === 0) {
+                let randomVertex;
+                do {
+                    randomVertex = Math.floor(Math.random() * vertexCount);
+                } while (randomVertex === i || connections[randomVertex].size >= 3);
+
                 const weight = Math.floor(Math.random() * 100) + 1;
-                document.getElementById(`cell-${i}-${j}`).value = weight;
-                document.getElementById(`cell-${j}-${i}`).value = weight; // Обеспечиваем симметрию матрицы
-                connections[i]++;
-                connections[j]++;
-            } else {
-                document.getElementById(`cell-${i}-${j}`).value = 0;
-                document.getElementById(`cell-${j}-${i}`).value = 0; // Обеспечиваем симметрию матрицы
+                document.getElementById(`cell-${i}-${randomVertex}`).value = weight;
+                document.getElementById(`cell-${randomVertex}-${i}`).value = weight; // РћР±РµСЃРїРµС‡РёРІР°РµРј СЃРёРјРјРµС‚СЂРёСЋ РјР°С‚СЂРёС†С‹
+                connections[i].add(randomVertex);
+                connections[randomVertex].add(i);
             }
+        }
+
+        // РџСЂРѕРІРµСЂРєР° РЅР° СЃРІСЏР·РЅРѕСЃС‚СЊ РіСЂР°С„Р° СЃ РїРѕРјРѕС‰СЊСЋ РїРѕРёСЃРєР° РІ РіР»СѓР±РёРЅСѓ (DFS)
+        function isGraphConnected() {
+            const visited = new Array(vertexCount).fill(false);
+            const stack = [0];
+            visited[0] = true;
+
+            while (stack.length > 0) {
+                const node = stack.pop();
+                connections[node].forEach((neighbor) => {
+                    if (!visited[neighbor]) {
+                        visited[neighbor] = true;
+                        stack.push(neighbor);
+                    }
+                });
+            }
+
+            return visited.every(v => v);
+        }
+
+        if (!isGraphConnected()) {
+            generationMatrix2(); // РџРµСЂРµРіРµРЅРµСЂРёСЂСѓРµРј РіСЂР°С„, РµСЃР»Рё РѕРЅ РЅРµСЃРІСЏР·РЅС‹Р№
         }
     }
 
-    // Добавление ребер к случайным вершинам, если они остались изолированными и у вершины меньше 3 рёбер
-    for (let i = 0; i < vertexCount; i++) {
-        let hasEdge = false;
-        let edgeCount = 0; // Счётчик рёбер для текущей вершины
-        for (let j = 0; j < vertexCount; j++) {
-            if (document.getElementById(`cell-${i}-${j}`).value !== "0") {
-                hasEdge = true;
-                edgeCount++;
-            }
-        }
-        if (!hasEdge && edgeCount < 3) { // Проверяем, что у вершины меньше 3 рёбер
-            const randomVertex = Math.floor(Math.random() * vertexCount);
-            const weight = Math.floor(Math.random() * 100) + 1;
-            document.getElementById(`cell-${i}-${randomVertex}`).value = weight;
-            document.getElementById(`cell-${randomVertex}-${i}`).value = weight;
-        }
-    }
+    generationMatrix2();
     errorMessageElement.style.display = 'none';
     document.getElementById('graphminostov').style.display = 'none';
     buildGraphKruskal();
@@ -191,7 +252,7 @@ function generationMatrixKruskal() {
 
 
 
-// Функция получения матрицы из файла
+// Р¤СѓРЅРєС†РёСЏ РїРѕР»СѓС‡РµРЅРёСЏ РјР°С‚СЂРёС†С‹ РёР· С„Р°Р№Р»Р°
 function handleFileKruskal(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -203,19 +264,19 @@ function handleFileKruskal(event) {
         const errorMessageElement = document.getElementById('error-message');
 
         if (matrix.length <= 2 || matrix.length >= 11) {
-            errorMessageElement.textContent = 'Количество вершин матрицы в вашем файле должно быть от 3 до 10.';
+            errorMessageElement.textContent = 'РљРѕР»РёС‡РµСЃС‚РІРѕ РІРµСЂС€РёРЅ РјР°С‚СЂРёС†С‹ РІ РІР°С€РµРј С„Р°Р№Р»Рµ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РѕС‚ 3 РґРѕ 10.';
             errorMessageElement.style.display = 'block';
             return;
         }
 
         if (!isSymmetricKruskal(matrix)) {
-            errorMessageElement.textContent = 'Матрица в вашем файле нессиметрична.';
+            errorMessageElement.textContent = 'РњР°С‚СЂРёС†Р° РІ РІР°С€РµРј С„Р°Р№Р»Рµ РЅРµСЃСЃРёРјРµС‚СЂРёС‡РЅР°.';
             errorMessageElement.style.display = 'block';
             return;
         }
 
         if (!isValidValuesKruskal(matrix)) {
-            errorMessageElement.textContent = 'Матрица имеет некорректные значения. Значения матрицы должны быть от 0 до 999, а по диагонали должны быть нули!';
+            errorMessageElement.textContent = 'РњР°С‚СЂРёС†Р° РёРјРµРµС‚ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ. Р—РЅР°С‡РµРЅРёСЏ РјР°С‚СЂРёС†С‹ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ РѕС‚ 0 РґРѕ 100, Р° РїРѕ РґРёР°РіРѕРЅР°Р»Рё РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ РЅСѓР»Рё!';
             errorMessageElement.style.display = 'block';
             return;
         }
@@ -226,7 +287,7 @@ function handleFileKruskal(event) {
         buildGraphKruskal();
     };
 
-    // Сбросить значение input[type=file], чтобы событие onchange сработало при выборе того же файла
+    // РЎР±СЂРѕСЃРёС‚СЊ Р·РЅР°С‡РµРЅРёРµ input[type=file], С‡С‚РѕР±С‹ СЃРѕР±С‹С‚РёРµ onchange СЃСЂР°Р±РѕС‚Р°Р»Рѕ РїСЂРё РІС‹Р±РѕСЂРµ С‚РѕРіРѕ Р¶Рµ С„Р°Р№Р»Р°
     event.target.value = '';
 
     reader.readAsText(file);
@@ -244,7 +305,7 @@ function isSymmetricKruskal(matrix) {
 
 function isValidValuesKruskal(matrix) {
     return matrix.every((row, i) =>
-        row.every((value, j) => (i === j) ? (value === 0) : (value >= 0 && value <= 999))
+        row.every((value, j) => (i === j) ? (value === 0) : (value >= 0 && value <= 100))
     );
 }
 
@@ -254,7 +315,7 @@ function displayMatrixKruskal(matrix) {
 
     let matrixHTML = '<table>';
 
-    // Создаем верхнюю шапку с номерами столбцов
+    // РЎРѕР·РґР°РµРј РІРµСЂС…РЅСЋСЋ С€Р°РїРєСѓ СЃ РЅРѕРјРµСЂР°РјРё СЃС‚РѕР»Р±С†РѕРІ
     matrixHTML += '<tr><td></td>';
     for (let i = 0; i < n; i++) {
         matrixHTML += `<td class="bfs-td" style="height: 30px;">${i + 1}</td>`;
@@ -262,9 +323,9 @@ function displayMatrixKruskal(matrix) {
 
     matrixHTML += '</tr>';
 
-    // Создаем таблицу с ячейками для графа
+    // РЎРѕР·РґР°РµРј С‚Р°Р±Р»РёС†Сѓ СЃ СЏС‡РµР№РєР°РјРё РґР»СЏ РіСЂР°С„Р°
     for (let i = 0; i < n; i++) {
-        matrixHTML += `<tr><td class="bfs-td" style="width: 40px;">${i + 1}</td>`; // Создаем боковую шапку с номерами строк
+        matrixHTML += `<tr><td class="bfs-td" style="width: 40px;">${i + 1}</td>`; // РЎРѕР·РґР°РµРј Р±РѕРєРѕРІСѓСЋ С€Р°РїРєСѓ СЃ РЅРѕРјРµСЂР°РјРё СЃС‚СЂРѕРє
         for (let j = 0; j < n; j++) {
             if (i === j) {
                 matrixHTML += `<td><input class="input_bfs rounded-input" type="number" value="${matrix[i][j]}" min="0" max="999" id="cell-${i}-${j}" style="width: 80px;" readonly></td>`;
@@ -278,21 +339,21 @@ function displayMatrixKruskal(matrix) {
     matrixHTML += '</table>';
     document.getElementById('matrix_kruskal').innerHTML = matrixHTML;
 
-    // Добавляем обработчик событий для изменения значений в ячейках
+    // Р”РѕР±Р°РІР»СЏРµРј РѕР±СЂР°Р±РѕС‚С‡РёРє СЃРѕР±С‹С‚РёР№ РґР»СЏ РёР·РјРµРЅРµРЅРёСЏ Р·РЅР°С‡РµРЅРёР№ РІ СЏС‡РµР№РєР°С…
     var inputs = document.querySelectorAll('.input_bfs');
     inputs.forEach(input => {
         input.addEventListener('change', function (event) {
-            // Получаем значение из измененной ячейки
+            // РџРѕР»СѓС‡Р°РµРј Р·РЅР°С‡РµРЅРёРµ РёР· РёР·РјРµРЅРµРЅРЅРѕР№ СЏС‡РµР№РєРё
             var value = event.target.value;
-            // Получаем индексы строки и столбца измененной ячейки
+            // РџРѕР»СѓС‡Р°РµРј РёРЅРґРµРєСЃС‹ СЃС‚СЂРѕРєРё Рё СЃС‚РѕР»Р±С†Р° РёР·РјРµРЅРµРЅРЅРѕР№ СЏС‡РµР№РєРё
             var rowIndex = parseInt(event.target.id.split('-')[1]);
             var colIndex = parseInt(event.target.id.split('-')[2]);
-            // Если измененная ячейка находится на диагонали, оставляем ее значение равным нулю и прерываем обработку
+            // Р•СЃР»Рё РёР·РјРµРЅРµРЅРЅР°СЏ СЏС‡РµР№РєР° РЅР°С…РѕРґРёС‚СЃСЏ РЅР° РґРёР°РіРѕРЅР°Р»Рё, РѕСЃС‚Р°РІР»СЏРµРј РµРµ Р·РЅР°С‡РµРЅРёРµ СЂР°РІРЅС‹Рј РЅСѓР»СЋ Рё РїСЂРµСЂС‹РІР°РµРј РѕР±СЂР°Р±РѕС‚РєСѓ
             if (rowIndex === colIndex) {
                 event.target.value = 0;
                 return;
             }
-            // Устанавливаем значение в соответствующей симметричной ячейке
+            // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј Р·РЅР°С‡РµРЅРёРµ РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РµР№ СЃРёРјРјРµС‚СЂРёС‡РЅРѕР№ СЏС‡РµР№РєРµ
             document.getElementById(`cell-${colIndex}-${rowIndex}`).value = value;
         });
     });
@@ -300,8 +361,8 @@ function displayMatrixKruskal(matrix) {
 
 
 
-// Функция для отправки данных для алгоритма Краскала (на питоне)
-function sendMatrixData() {
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚РїСЂР°РІРєРё РґР°РЅРЅС‹С… РґР»СЏ Р°Р»РіРѕСЂРёС‚РјР° РљСЂР°СЃРєР°Р»Р° (РЅР° РїРёС‚РѕРЅРµ)
+function sendMatrixDataKruskal() {
     const n = parseInt(document.getElementById('vertices-input').value);
     let matrix = [];
 
@@ -323,20 +384,27 @@ function sendMatrixData() {
     })
         .then(response => response.json())
         .then(data => {
-            // Получение матрицы минимального остова из ответа сервера
+            // РџРѕР»СѓС‡РµРЅРёРµ РјР°С‚СЂРёС†С‹ РјРёРЅРёРјР°Р»СЊРЅРѕРіРѕ РѕСЃС‚РѕРІР° Рё РІРµСЃР° РёР· РѕС‚РІРµС‚Р° СЃРµСЂРІРµСЂР°
             const mstMatrix = data.mst_matrix;
+            const mstWeight = data.mst_weight;
+
+            // РћС‚РѕР±СЂР°Р¶РµРЅРёРµ РІРµСЃР° РјРёРЅРёРјР°Р»СЊРЅРѕРіРѕ РѕСЃС‚РѕРІР°
+            const weightMessage = document.getElementById('weight-message');
+            weightMessage.innerText = `Р’РµСЃ РєСЂР°С‚С‡Р°Р№С€РµРіРѕ РѕСЃС‚РѕРІР° L = ${mstWeight}`;
+
+            // РћС‚РѕР±СЂР°Р¶РµРЅРёРµ РіСЂР°С„Р° РјРёРЅРёРјР°Р»СЊРЅРѕРіРѕ РѕСЃС‚РѕРІР°
             document.getElementById('graphminostov').style.display = 'block';
-            // Вызов функции buildGraphKruskal с полученной матрицей и количеством вершин
             buildGraphKruskalMin(mstMatrix, n);
         })
-        .catch(error => console.error('Ошибка:', error));
+        .catch(error => console.error('РћС€РёР±РєР°:', error));
 }
-// Функция построения кратчайшего остова
+
+// Р¤СѓРЅРєС†РёСЏ РїРѕСЃС‚СЂРѕРµРЅРёСЏ РєСЂР°С‚С‡Р°Р№С€РµРіРѕ РѕСЃС‚РѕРІР°
 function buildGraphKruskalMin(mstMatrix, vertexCount) {
     var graphData = { nodes: [], edges: [] };
 
     for (var i = 0; i < vertexCount; i++) {
-        graphData.nodes.push({ id: i, label: String(i), shape: "circle", size: 40 }); // увеличиваем размер узлов до 40
+        graphData.nodes.push({ id: i, label: String(i), shape: "circle", size: 40 }); // СѓРІРµР»РёС‡РёРІР°РµРј СЂР°Р·РјРµСЂ СѓР·Р»РѕРІ РґРѕ 40
     }
 
     for (var i = 0; i < vertexCount; i++) {
@@ -350,7 +418,7 @@ function buildGraphKruskalMin(mstMatrix, vertexCount) {
                     title: weight.toString(),
                     smooth: { enabled: false },
                     arrows: { to: { enabled: false } },
-                    width: 2 // увеличиваем толщину ребер
+                    width: 2 // СѓРІРµР»РёС‡РёРІР°РµРј С‚РѕР»С‰РёРЅСѓ СЂРµР±РµСЂ
                 });
             }
         }
@@ -362,7 +430,7 @@ function buildGraphKruskalMin(mstMatrix, vertexCount) {
     var options = {
         layout: {
             improvedLayout: true,
-            randomSeed: 2, // фиксируем начальное положение узлов
+            randomSeed: 2, // С„РёРєСЃРёСЂСѓРµРј РЅР°С‡Р°Р»СЊРЅРѕРµ РїРѕР»РѕР¶РµРЅРёРµ СѓР·Р»РѕРІ
             clusterThreshold: 150,
             hierarchical: { enabled: false }
         },
@@ -380,7 +448,7 @@ function buildGraphKruskalMin(mstMatrix, vertexCount) {
             stabilization: {
                 enabled: true,
                 iterations: 1000,
-                fit: true // автоматически подгонять граф к контейнеру
+                fit: true // Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РїРѕРґРіРѕРЅСЏС‚СЊ РіСЂР°С„ Рє РєРѕРЅС‚РµР№РЅРµСЂСѓ
             },
             minVelocity: 0.75,
             maxVelocity: 50
@@ -388,7 +456,7 @@ function buildGraphKruskalMin(mstMatrix, vertexCount) {
         interaction: { navigationButtons: true, keyboard: true },
         nodes: {
             shape: "circle",
-            size: 40, // увеличиваем размер узлов до 40
+            size: 40, // СѓРІРµР»РёС‡РёРІР°РµРј СЂР°Р·РјРµСЂ СѓР·Р»РѕРІ РґРѕ 40
             font: { size: 20, face: "Arial", bold: { size: 14, vadjust: 0 } },
             margin: 20,
             borderWidth: 2,
@@ -409,7 +477,9 @@ function buildGraphKruskalMin(mstMatrix, vertexCount) {
     };
 
     var network2 = new vis.Network(container, graphData, options);
-    network2.fit(); // автоматически масштабируем граф
+    network2.fit(); // Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РјР°СЃС€С‚Р°Р±РёСЂСѓРµРј РіСЂР°С„
 }
+
+
 
 
