@@ -6,13 +6,16 @@ import re
 
 @post('/dfs')
 def dfs_form():
+    #получение данных в формате json
     data = request.json
     
     start_vertex = int(data['startVertex'])
     adjacency_matrix = data['matrixTable']
 
+    #Получение матрицы смежности остовного дерева
     spanning_tree = dfs_spanning_tree(make_symmetric(adjacency_matrix), start_vertex)
 
+    #отправление матрицы в формате json
     response.content_type = 'application/json'
     return dumps(spanning_tree)        
 
