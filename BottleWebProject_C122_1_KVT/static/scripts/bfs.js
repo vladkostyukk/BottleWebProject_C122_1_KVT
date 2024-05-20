@@ -82,14 +82,14 @@ function handleFile(event) {
         const contents = e.target.result.trim();
         const matrix = parseMatrix(contents);
 
-        if (matrix.length < 3 || matrix.length > 10) {
+        if (!isValidValues(matrix)) {
+            errorMessage.textContent = 'В матрице некорректные значения (0 или 1).';
+            errorMessage.style.display = 'inline'; // Показать сообщение об ошибке
+        } else if (matrix.length < 3 || matrix.length > 10) {
             errorMessage.textContent = 'Некорректная размерность квадратной матрицы (2 < n < 11).';
             errorMessage.style.display = 'inline'; // Показать сообщение об ошибке
         } else if (!isSymmetric(matrix)) {
             errorMessage.textContent = 'Матрица несимметрична.';
-            errorMessage.style.display = 'inline'; // Показать сообщение об ошибке
-        } else if (!isValidValues(matrix)) {
-            errorMessage.textContent = 'В матрице некорректные значения (0 или 1).';
             errorMessage.style.display = 'inline'; // Показать сообщение об ошибке
         } else {
             errorMessage.style.display = 'none'; // Скрыть сообщение об ошибке, если матрица валидна
@@ -266,7 +266,7 @@ function displayGraph(n, matrix, graph) {
         .data(nodes)
         .enter().append('circle')
         .attr('r', nodeRadius)
-        .attr('fill', 'black');
+        .attr('fill', '#3c3b3b');
 
     // Отрисовка связей между вершинами
     for (let i = 0; i < n; i++) {
@@ -277,7 +277,7 @@ function displayGraph(n, matrix, graph) {
                     .attr('y1', height / 2 + Math.sin(2 * Math.PI * i / n) * (height / 2 - nodeRadius))
                     .attr('x2', width / 2 + Math.cos(2 * Math.PI * j / n) * (width / 2 - nodeRadius))
                     .attr('y2', height / 2 + Math.sin(2 * Math.PI * j / n) * (height / 2 - nodeRadius))
-                    .attr('stroke', 'black')
+                    .attr('stroke', '#3c3b3b')
                     .attr('stroke-width', 2);
             }
         }
@@ -296,7 +296,8 @@ function displayGraph(n, matrix, graph) {
         .text(d => d.id + 1)
         .attr('text-anchor', 'middle')
         .attr('dy', '.3em')
-        .attr('fill', 'white');
+        .attr('fill', 'white')
+        .style('font-weight', 'bold');
 
     document.getElementById('saveButtonBFS').style.display = 'inline-block';
 }
