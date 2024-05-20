@@ -105,17 +105,6 @@ footer {
     display: block;
 }
 
-.index-background {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: url("../../static/images/index-background.jpg");
-    background-size: cover;
-    left: 0;
-    top: 0;
-    z-index: -1;
-}
-
 .index-text-div {
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
@@ -209,22 +198,27 @@ footer {
         margin-top: -10px;
     }
 
-.bfs_div_theory {
+.bfs-div-theory {
     display: flex;
     align-items: center;
     margin-top: 40px;
 }
+    .bfs-div-theory div {
+        max-width: 50%;
+        height: auto;
+        width: auto;
+    }
 
-    .bfs_div_theory p {
+    .bfs-div-theory p {
         font-size: 18px;
         font-family: Verdana, sans-serif;
         color: black;
     }
 
-    .bfs_div_theory img {
-        max-width: 100%;
-        max-height: 100%;
-        width: 600px;
+    .bfs-div-theory img {
+        max-width: 50%;
+        height: auto;
+        width: auto;
     }
 
 .bfs-block-practice {
@@ -242,7 +236,6 @@ footer {
 
     .bfs-block-practice h2 {
         color: black;
-        font-weight: bold;
     }
 
     .bfs-block-practice h3 {
@@ -305,11 +298,12 @@ footer {
     height: 45px;
     line-height: 45px;
     border-radius: 45px;
-    margin: 20px 8px;
+    margin: 20px 16px 0px 0px;
     font-family: 'Montserrat', sans-serif;
     font-size: 11px;
     text-transform: uppercase;
     text-align: center;
+    cursor: pointer;
     letter-spacing: 3px;
     font-weight: 600;
     color: white;
@@ -325,15 +319,77 @@ footer {
         text-decoration: none;
     }
 
-#graph {
-    width: 500px;
-    height: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-    scroll-margin-top: 20vh;
+#div-graph-bfs {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 10px;
 }
 
+    #div-graph-bfs h3 {
+        color: black;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+.input-file-bfs {
+    position: relative;
+    display: inline-block;
+}
+
+    .input-file-bfs span {
+        text-decoration: none;
+        display: inline-block;
+        width: 140px;
+        height: 45px;
+        line-height: 45px;
+        border-radius: 45px;
+        margin: 20px 16px 5px 0px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 11px;
+        text-transform: uppercase;
+        text-align: center;
+        cursor: pointer;
+        letter-spacing: 3px;
+        font-weight: 600;
+        color: white;
+        background: #3c3b3b;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+        transition: .3s;
+    }
+
+    .input-file-bfs input[type=file] {
+        display: none;
+    }
+
+    .input-file-bfs:hover span {
+        background: #71a130;
+        box-shadow: 0 15px 20px rgba(140, 198, 63, .4);
+        color: white;
+        text-decoration: none;
+    }
+
+    .input-file-bfs:active span {
+        background: #71a130;
+        box-shadow: 0 15px 20px rgba(140, 198, 63, .4);
+        color: white;
+        text-decoration: none;
+    }
+
+#error-message-bfs {
+    display: none;
+    font-size: 16px;
+    font-family: Verdana, sans-serif;
+    color: black;
+}
+
+.save-div-bfs {
+    text-align: center;
+}
+
+    .save-div-bfs a {
+        display: none;
+    }
 
 .body_kruskal {
     font-size: 18px;
