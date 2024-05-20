@@ -48,21 +48,24 @@ function generateMatrixKruskal() {
 
 
 // Функция построения графа
+// Функция для построения графа на основе введенных данных
 function buildGraphKruskal() {
-    var vertexCount = parseInt(document.getElementById("vertices-input").value);
-    var graphData = { nodes: [], edges: [] };
-    const errorMessageElement = document.getElementById('error-message');
-    const connectMessageElement = document.getElementById('connect-message');
+    var vertexCount = parseInt(document.getElementById("vertices-input").value);  // Получение количества вершин из поля ввода
+    var graphData = { nodes: [], edges: [] };  // Инициализация объекта данных графа
+    const errorMessageElement = document.getElementById('error-message');  // Получение элемента для вывода сообщения об ошибке
+    const connectMessageElement = document.getElementById('connect-message');  // Получение элемента для вывода сообщения о связи графа
 
+    // Создание вершин графа
     for (var i = 0; i < vertexCount; i++) {
-        graphData.nodes.push({ id: i, label: String(i), shape: "circle", size: 40 });
+        graphData.nodes.push({ id: i, label: String(i), shape: "circle", size: 40 });  // Добавление вершины в объект данных графа
     }
 
+    // Создание рёбер графа на основе значений в ячейках
     for (var i = 0; i < vertexCount; i++) {
         for (var j = i + 1; j < vertexCount; j++) {
-            var weight = document.getElementById(`cell-${i}-${j}`).value;
-            if (weight !== "" && parseFloat(weight) !== 0) {
-                graphData.edges.push({
+            var weight = document.getElementById(`cell-${i}-${j}`).value;  // Получение значения веса ребра из соответствующей ячейки
+            if (weight !== "" && parseFloat(weight) !== 0) {  // Проверка наличия веса ребра
+                graphData.edges.push({  // Добавление ребра в объект данных графа
                     from: i,
                     to: j,
                     label: weight,
@@ -75,72 +78,76 @@ function buildGraphKruskal() {
         }
     }
 
-    if (!isGraphConnected(vertexCount, graphData.edges)) {
-        connectMessageElement.style.display = 'block';
-        document.getElementById('graphButtons').style.display = 'none';
-        connectMessageElement.innerHTML = "Граф несвязный!";
+    // Проверка связности графа
+    if (!isGraphConnected(vertexCount, graphData.edges)) {  // Вызов функции проверки связности
+        connectMessageElement.style.display = 'block';  
+        document.getElementById('graphButtons').style.display = 'none';  
+        connectMessageElement.innerHTML = "Граф несвязный!"; 
         return;
     } else {
-        connectMessageElement.style.display = 'none';
+        connectMessageElement.style.display = 'none'; 
     }
 
-    var container = document.getElementById("network");
-    container.innerHTML = "";
+    var container = document.getElementById("network");  // Получение контейнера для отображения графа
+    container.innerHTML = "";  // Очистка контейнера
 
     var options = {
-        layout: {
-            improvedLayout: true,
-            randomSeed: 2,
-            clusterThreshold: 150,
-            hierarchical: { enabled: false }
+        layout: {  // Опции компоновки вершин
+            improvedLayout: true,  // Улучшенная компоновка вершин
+            randomSeed: 2,  // Задание случайного начального состояния для генерации графа
+            clusterThreshold: 150,  // Порог для объединения вершин в кластеры
+            hierarchical: { enabled: false }  // Отключение иерархической компоновки
         },
-        physics: {
-            enabled: true,
-            barnesHut: {
-                gravitationalConstant: -30000,
-                centralGravity: 0.1,
-                springLength: 200,
-                springConstant: 0.05,
-                damping: 0.09,
-                avoidOverlap: 1
+        physics: {  // Опции физики графа
+            enabled: true,  // Включение физики
+            barnesHut: {  // Алгоритм Барнса-Хатт для ускорения симуляции
+                gravitationalConstant: -30000,  // Гравитационная постоянная для притяжения вершин
+                centralGravity: 0.1,  // Центральная гравитация для уменьшения "размазывания" графа
+                springLength: 200,  // Длина пружины, которая определяет расстояние между вершинами
+                springConstant: 0.05,  // Коэффициент пружины для определения силы упругости между вершинами
+                damping: 0.09,  // Сопротивление среды (трение), что предотвращает бесконечное колебание графа
+                avoidOverlap: 1  // Предотвращение перекрытия вершин
             },
-            solver: 'barnesHut',
-            stabilization: {
-                enabled: true,
-                iterations: 1000,
-                fit: true
+            solver: 'barnesHut',  // Выбор алгоритма симуляции
+            stabilization: {  // Опции стабилизации графа
+                enabled: true,  // Включение стабилизации
+                iterations: 1000,  // Количество итераций стабилизации
+                fit: true  // Автоматическое масштабирование графа
             },
-            minVelocity: 0.75,
-            maxVelocity: 50
+            minVelocity: 0.75,  // Минимальная скорость вершин
+            maxVelocity: 50  // Максимальная скорость вершин
         },
-        interaction: { navigationButtons: true, keyboard: true },
-        nodes: {
-            shape: "circle",
-            size: 40,
-            font: { size: 20, face: "Arial", bold: { size: 14, vadjust: 0 } },
-            margin: 20,
-            borderWidth: 2,
-            borderWidthSelected: 2
+        interaction: {  // Опции взаимодействия с графом
+            navigationButtons: true,  // Отображение кнопок навигации
+            keyboard: true  // Включение управления с клавиатуры
         },
-        edges: {
-            smooth: false,
-            arrows: { to: { enabled: true } },
-            font: {
-                align: 'middle',
-                size: 16,
-                strokeWidth: 1,
-                strokeColor: '#ffffff'
+        nodes: {  // Опции вершин
+            shape: "circle",  // Форма вершин
+            size: 40,  // Размер вершин
+            font: { size: 20, face: "Arial", bold: { size: 14, vadjust: 0 } },  // Настройки шрифта
+            margin: 20,  // Отступы
+            borderWidth: 2,  // Ширина границы вершин
+            borderWidthSelected: 2  // Ширина границы выбранных вершин
+        },
+        edges: {  // Опции рёбер
+            smooth: false,  // Отключение сглаживания рёбер
+            arrows: { to: { enabled: true } },  // Отображение стрелок на рёбрах
+            font: {  // Опции шрифта для подписей рёбер
+                align: 'middle',  // Выравнивание текста
+                size: 16,  // Размер шрифта
+                strokeWidth: 1,  // Ширина обводки текста
+                strokeColor: '#ffffff'  // Цвет обводки текста
             },
-            scaling: { label: true },
-            widthConstraint: { maximum: 50 }
+            scaling: { label: true },  // Включение масштабирования меток рёбер
+            widthConstraint: { maximum: 50 }  // Ограничение максимальной ширины рёбер
         }
     };
 
-    var network = new vis.Network(container, graphData, options);
-    network.fit();
-    document.getElementById('graphminostov').style.display = 'none';
-    document.getElementById('graphButtons').style.display = 'block';
-    errorMessageElement.style.display = 'none';
+    var network = new vis.Network(container, graphData, options);  // Создание объекта для отображения графа
+    network.fit();  // Автоматическое масштабирование графа
+    document.getElementById('graphminostov').style.display = 'none';  
+    document.getElementById('graphButtons').style.display = 'block';  
+    errorMessageElement.style.display = 'none';  
 }
 
 function isGraphConnected(vertexCount, edges) {
@@ -204,7 +211,7 @@ function generationMatrixKruskal() {
             }
         }
 
-        // Проверка и исправление изолированных вершин
+        // Проверка изолированных вершин
         for (let i = 0; i < vertexCount; i++) {
             if (connections[i].size === 0) {
                 let randomVertex;
@@ -220,7 +227,7 @@ function generationMatrixKruskal() {
             }
         }
 
-        // Проверка на связность графа с помощью поиска в глубину (DFS)
+        // Проверка на связность графа 
         function isGraphConnected() {
             const visited = new Array(vertexCount).fill(false);
             const stack = [0];
@@ -269,17 +276,19 @@ function handleFileKruskal(event) {
             return;
         }
 
-        if (!isSymmetricKruskal(matrix)) {
-            errorMessageElement.textContent = 'Матрица в вашем файле нессиметрична.';
+        if (!isValidValuesKruskal(matrix)) {
+            errorMessageElement.textContent = 'Матрица имеет некорректные значения. Значения матрицы должны быть числовые от 0 до 100, а по диагонали должны быть нули!';
             errorMessageElement.style.display = 'block';
             return;
         }
 
-        if (!isValidValuesKruskal(matrix)) {
-            errorMessageElement.textContent = 'Матрица имеет некорректные значения. Значения матрицы должны быть от 0 до 100, а по диагонали должны быть нули!';
+        if (!isSymmetricKruskal(matrix)) {
+            errorMessageElement.textContent = 'Матрица в вашем файле не симметрична.';
             errorMessageElement.style.display = 'block';
             return;
         }
+
+        
 
         errorMessageElement.style.display = 'none';
         document.getElementById('graphminostov').style.display = 'none';
@@ -360,7 +369,6 @@ function displayMatrixKruskal(matrix) {
 }
 
 
-
 // Функция для отправки данных для алгоритма Краскала (на питоне)
 function sendMatrixDataKruskal() {
     const n = parseInt(document.getElementById('vertices-input').value);
@@ -388,6 +396,9 @@ function sendMatrixDataKruskal() {
             const mstMatrix = data.mst_matrix;
             const mstWeight = data.mst_weight;
 
+            // Сохранение матрицы минимального остова в глобальную переменную
+            window.mstMatrix = mstMatrix;
+
             // Отображение веса минимального остова
             const weightMessage = document.getElementById('weight-message');
             weightMessage.innerText = `Вес кратчайшего остова L = ${mstWeight}`;
@@ -399,38 +410,88 @@ function sendMatrixDataKruskal() {
         .catch(error => console.error('Ошибка:', error));
 }
 
+
+// Функция сохранения исходной матрицы графа в файл
+function saveGraphKruskal() {
+    const n = parseInt(document.getElementById('vertices-input').value);
+    let matrix = [];
+
+    for (let i = 0; i < n; i++) {
+        let row = [];
+        for (let j = 0; j < n; j++) {
+            const cellValue = document.getElementById(`cell-${i}-${j}`).value;
+            row.push(cellValue);
+        }
+        matrix.push(row);
+    }
+
+    // Формируем содержимое файла в виде строки
+    let fileContent = '';
+    for (let i = 0; i < n; i++) {
+        fileContent += matrix[i].join(' ') + '\n';
+    }
+
+    // Создаем Blob и сохраняем его как файл
+    const blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
+    saveAs(blob, 'graph_matrix.txt');
+}
+
+
+
+
+// Функция сохранения матрицы кратчайшего остова в файл
+function saveGraphKruskalMin() {
+    if (!window.mstMatrix) {
+        console.error('Матрица кратчайшего остова не найдена');
+        return;
+    }
+
+    let mstMatrix = window.mstMatrix;
+    let n = mstMatrix.length;
+    let fileContent = '';
+
+    for (let i = 0; i < n; i++) {
+        fileContent += mstMatrix[i].join(' ') + '\n';
+    }
+
+    // Создаем Blob и сохраняем его как файл
+    const blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
+    saveAs(blob, 'mst_matrix.txt');
+}
+
+
 // Функция построения кратчайшего остова
 function buildGraphKruskalMin(mstMatrix, vertexCount) {
-    var graphData = { nodes: [], edges: [] };
+    var graphData = { nodes: [], edges: [] }; // Создаем объект для хранения данных о графе
 
     for (var i = 0; i < vertexCount; i++) {
-        graphData.nodes.push({ id: i, label: String(i), shape: "circle", size: 40 }); // увеличиваем размер узлов до 40
+        graphData.nodes.push({ id: i, label: String(i), shape: "circle", size: 40 }); // Добавляем узлы в объект данных графа
     }
 
     for (var i = 0; i < vertexCount; i++) {
         for (var j = i + 1; j < vertexCount; j++) {
-            var weight = mstMatrix[i][j];
-            if (weight !== 0) {
-                graphData.edges.push({
+            var weight = mstMatrix[i][j]; // Получаем вес ребра из матрицы остова
+            if (weight !== 0) { // Проверяем, что вес не равен нулю (есть ребро)
+                graphData.edges.push({ // Добавляем ребро в объект данных графа
                     from: i,
                     to: j,
-                    label: weight.toString(),
+                    label: weight.toString(), // Преобразуем вес в строку
                     title: weight.toString(),
-                    smooth: { enabled: false },
+                    smooth: { enabled: false }, // Отключаем сглаживание
                     arrows: { to: { enabled: false } },
-                    width: 2 // увеличиваем толщину ребер
+                    width: 2 // Устанавливаем ширину ребра
                 });
             }
         }
     }
 
-    var container = document.getElementById("network2");
-    container.innerHTML = "";
+    var container = document.getElementById("network2"); // Получаем контейнер для отображения графа
+    container.innerHTML = ""; // Очищаем содержимое контейнера
 
-    var options = {
+    var options = { // Настройки отображения графа
         layout: {
             improvedLayout: true,
-            randomSeed: 2, // фиксируем начальное положение узлов
+            randomSeed: 2, // Фиксируем начальное положение узлов
             clusterThreshold: 150,
             hierarchical: { enabled: false }
         },
@@ -448,21 +509,21 @@ function buildGraphKruskalMin(mstMatrix, vertexCount) {
             stabilization: {
                 enabled: true,
                 iterations: 1000,
-                fit: true // автоматически подгонять граф к контейнеру
+                fit: true // Автоматически подгонять граф к контейнеру
             },
             minVelocity: 0.75,
             maxVelocity: 50
         },
-        interaction: { navigationButtons: true, keyboard: true },
-        nodes: {
+        interaction: { navigationButtons: true, keyboard: true }, // Настройки интеракции с графом
+        nodes: { // Настройки вершин
             shape: "circle",
-            size: 40, // увеличиваем размер узлов до 40
+            size: 40,
             font: { size: 20, face: "Arial", bold: { size: 14, vadjust: 0 } },
             margin: 20,
             borderWidth: 2,
             borderWidthSelected: 2
         },
-        edges: {
+        edges: { // Настройки рёбер
             smooth: false,
             arrows: { to: { enabled: true } },
             font: {
@@ -476,9 +537,14 @@ function buildGraphKruskalMin(mstMatrix, vertexCount) {
         }
     };
 
-    var network2 = new vis.Network(container, graphData, options);
-    network2.fit(); // автоматически масштабируем граф
+    var network2 = new vis.Network(container, graphData, options); // Создаем объект сети с использованием данных графа и настроек
+    network2.fit(); // Автоматически масштабируем граф
 }
+
+
+
+
+
 
 
 
