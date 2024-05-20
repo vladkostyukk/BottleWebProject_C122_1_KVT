@@ -6,20 +6,20 @@ import re
 
 @post('/dfs')
 def dfs_form():
-    #получение данных в формате json
+    #РїРѕР»СѓС‡РµРЅРёРµ РґР°РЅРЅС‹С… РІ С„РѕСЂРјР°С‚Рµ json
     data = request.json
     
     start_vertex = int(data['startVertex'])
     adjacency_matrix = data['matrixTable']
 
-    #Получение матрицы смежности остовного дерева
+    #РџРѕР»СѓС‡РµРЅРёРµ РјР°С‚СЂРёС†С‹ СЃРјРµР¶РЅРѕСЃС‚Рё РѕСЃС‚РѕРІРЅРѕРіРѕ РґРµСЂРµРІР°
     spanning_tree = dfs_spanning_tree(make_symmetric(adjacency_matrix), start_vertex)
 
-    #отправление матрицы в формате json
+    #РѕС‚РїСЂР°РІР»РµРЅРёРµ РјР°С‚СЂРёС†С‹ РІ С„РѕСЂРјР°С‚Рµ json
     response.content_type = 'application/json'
     return dumps(spanning_tree)        
 
-#Функция делающая матрицу симметричной
+#Р¤СѓРЅРєС†РёСЏ РґРµР»Р°СЋС‰Р°СЏ РјР°С‚СЂРёС†Сѓ СЃРёРјРјРµС‚СЂРёС‡РЅРѕР№
 def make_symmetric(matrix):
     n = len(matrix)
     for i in range(n):
@@ -28,7 +28,7 @@ def make_symmetric(matrix):
                 matrix[j][i] = 1
     return matrix
  
-#Функция обхода графа в глубину
+#Р¤СѓРЅРєС†РёСЏ РѕР±С…РѕРґР° РіСЂР°С„Р° РІ РіР»СѓР±РёРЅСѓ
 def dfs(graph, vertex, visited, spanning_tree):
     visited[vertex] = True
     for neighbor in range(len(graph)):
@@ -37,7 +37,7 @@ def dfs(graph, vertex, visited, spanning_tree):
             spanning_tree[neighbor][vertex] = 1
             dfs(graph, neighbor, visited, spanning_tree)
 
-#Функция создания матрицы смежности остовного графа
+#Р¤СѓРЅРєС†РёСЏ СЃРѕР·РґР°РЅРёСЏ РјР°С‚СЂРёС†С‹ СЃРјРµР¶РЅРѕСЃС‚Рё РѕСЃС‚РѕРІРЅРѕРіРѕ РіСЂР°С„Р°
 def dfs_spanning_tree(adjacency_matrix, start_vertex):
     num_vertices = len(adjacency_matrix)
     spanning_tree = [[0 for _ in range(num_vertices)] for _ in range(num_vertices)]
@@ -46,7 +46,7 @@ def dfs_spanning_tree(adjacency_matrix, start_vertex):
     return spanning_tree
 
 
-#Функция генерации рандомной матрицы смежности
+#Р¤СѓРЅРєС†РёСЏ РіРµРЅРµСЂР°С†РёРё СЂР°РЅРґРѕРјРЅРѕР№ РјР°С‚СЂРёС†С‹ СЃРјРµР¶РЅРѕСЃС‚Рё
 @get('/dfs/gen')
 def dfs_generate_matrix():
     n = random.randint(4, 10)
@@ -57,7 +57,7 @@ def dfs_generate_matrix():
             adj_matrix[i][j] = adj_matrix[j][i] = random.randint(0, 1)
     return {'start_vertex':start_v,'matrix':adj_matrix}
 
-#Функция чтения матрицы смежности из файла
+#Р¤СѓРЅРєС†РёСЏ С‡С‚РµРЅРёСЏ РјР°С‚СЂРёС†С‹ СЃРјРµР¶РЅРѕСЃС‚Рё РёР· С„Р°Р№Р»Р°
 @get('/dfs/upload')
 def dfs_read_matrix():
     adj_matr = []
@@ -68,7 +68,7 @@ def dfs_read_matrix():
             adj_matr.append(row)
     return {'start_vertex':start_vertex,'matrix':adj_matr}
 
-#Функция сохранения результата в файл
+#Р¤СѓРЅРєС†РёСЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ СЂРµР·СѓР»СЊС‚Р°С‚Р° РІ С„Р°Р№Р»
 @post('/dfs/save')
 def dfs_save():
     data = str(request.json)
