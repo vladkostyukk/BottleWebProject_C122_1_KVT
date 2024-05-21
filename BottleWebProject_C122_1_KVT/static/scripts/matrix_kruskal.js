@@ -48,7 +48,6 @@ function generateMatrixKruskal() {
 
 
 // Функция построения графа
-// Функция для построения графа на основе введенных данных
 function buildGraphKruskal() {
     var vertexCount = parseInt(document.getElementById("vertices-input").value);  // Получение количества вершин из поля ввода
     var graphData = { nodes: [], edges: [] };  // Инициализация объекта данных графа
@@ -150,25 +149,35 @@ function buildGraphKruskal() {
     errorMessageElement.style.display = 'none';  
 }
 
+
+
+// Функция для определения связности графа
 function isGraphConnected(vertexCount, edges) {
+    // Создание списка смежности
     var adjList = {};
     for (var i = 0; i < vertexCount; i++) {
         adjList[i] = [];
     }
 
+    // Заполнение списка смежности на основе ребер
     edges.forEach(edge => {
         adjList[edge.from].push(edge.to);
         adjList[edge.to].push(edge.from);
     });
 
+    // Инициализация массива посещенных вершин
     var visited = new Array(vertexCount).fill(false);
+    // Инициализация стека с начальной вершиной
     var stack = [0];
     visited[0] = true;
     var visitedCount = 1;
 
+    // Обход графа в глубину
     while (stack.length > 0) {
         var node = stack.pop();
+        // Перебор соседних вершин текущей вершины
         adjList[node].forEach(neighbor => {
+            // Если соседняя вершина не посещена, посещаем ее и добавляем в стек
             if (!visited[neighbor]) {
                 visited[neighbor] = true;
                 visitedCount++;
@@ -177,8 +186,10 @@ function isGraphConnected(vertexCount, edges) {
         });
     }
 
+    // Если количество посещенных вершин равно общему количеству вершин в графе, то граф связный
     return visitedCount === vertexCount;
 }
+
 
 
 // Функция генерации матрицы
@@ -369,6 +380,7 @@ function displayMatrixKruskal(matrix) {
 }
 
 
+
 // Функция для отправки данных для алгоритма Краскала (на питоне)
 function sendMatrixDataKruskal() {
     const n = parseInt(document.getElementById('vertices-input').value);
@@ -411,6 +423,7 @@ function sendMatrixDataKruskal() {
 }
 
 
+
 // Функция сохранения исходной матрицы графа в файл
 function saveGraphKruskal() {
     const n = parseInt(document.getElementById('vertices-input').value);
@@ -438,7 +451,6 @@ function saveGraphKruskal() {
 
 
 
-
 // Функция сохранения матрицы кратчайшего остова в файл
 function saveGraphKruskalMin() {
     if (!window.mstMatrix) {
@@ -458,6 +470,7 @@ function saveGraphKruskalMin() {
     const blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
     saveAs(blob, 'mst_matrix.txt');
 }
+
 
 
 // Функция построения кратчайшего остова
@@ -540,6 +553,13 @@ function buildGraphKruskalMin(mstMatrix, vertexCount) {
     var network2 = new vis.Network(container, graphData, options); // Создаем объект сети с использованием данных графа и настроек
     network2.fit(); // Автоматически масштабируем граф
 }
+
+
+
+// Функция для перехода на окошко калькулятора
+function selectTabTCalculate() {
+    document.getElementById('tab-2').checked = true;
+} 
 
 
 
