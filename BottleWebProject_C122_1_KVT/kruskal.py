@@ -1,5 +1,5 @@
-from bottle import post, request 
-import json  
+from bottle import post, request
+import json
 
 @post('/home')
 def my_form():
@@ -8,8 +8,12 @@ def my_form():
     matrix = data.get('matrix')  # Извлечение матрицы из данных запроса
     vertex_count = data.get('vertexCount')  # Извлечение количества вершин из данных запроса
 
-    mst_matrix, mst_weight = kruskal_algorithm(matrix, vertex_count)
+    # Валидация матрицы перед применением алгоритма Краскала
+    validation_result = check_matrix(matrix, vertex_count)
+    if validation_result:
+        return validation_result
 
+    mst_matrix, mst_weight = kruskal_algorithm(matrix, vertex_count)
     return {'mst_matrix': mst_matrix, 'mst_weight': mst_weight}
 
 
@@ -56,18 +60,54 @@ class UnionFind:
         if self.parent[u] != u:  # Если узел не является корнем своего дерева
             self.parent[u] = self.find(self.parent[u])  # Присваивание корню прямой ссылки на него
         return self.parent[u]  
- 
+
     # Метод union для объединения двух подмножеств
     def union(self, u, v):
         root_u = self.find(u)  # Нахождение корня дерева для узла u
         root_v = self.find(v)  # Нахождение корня дерева для узла v
         if root_u != root_v:  # Если узлы принадлежат разным деревьям
-            # условие проверяет ранги (глубину) деревьев root_u и root_v. Если root_u имеет больший ранг, чем root_v, то поддерево, связанное с root_v, становится поддеревом под root_u. 
             if self.rank[root_u] > self.rank[root_v]:
                 self.parent[root_v] = root_u  # Присваивание корню v корня u
             else:
-                # В противном случае поддерево root_u становится поддеревом под root_v.
                 self.parent[root_u] = root_v  # Присваивание корню u корня v
-                # Если ранги root_u и root_v равны, то выбирается любой из них, и ранг поддерева, в который он был включен, увеличивается на 1.
                 if self.rank[root_u] == self.rank[root_v]:
                     self.rank[root_v] += 1  # Увеличение ранга корня поддерева
+               
+                    
+def check_matrix(matrix, vertex_count):
+    # Проверка на симметричность матрицы
+    if not is_symmetric(matrix):
+        return 'Матрица не симметрична.'
+    # Проверка на корректные значения в матрице
+    if not is_valid_values(matrix):
+        return 'Матрица имеет некорректные значения. Значения матрицы должны быть числовые от 0 до 100.'
+    # Проверка на наличие нулей на диагонали матрицы
+    if not has_zeros_on_diagonal(matrix):
+        return 'По диагонали матрицы должны быть нули.'
+    # Проверка на количество вершин матрицы
+    if not (3 <= vertex_count <= 10):
+        return 'Количество вершин матрицы должно быть от 3 до 10.'
+    return None
+
+# Функция для проверки симметричности матрицы
+def is_symmetric(matrix):
+    for i in range(len(matrix)):
+        for j in range(i):
+            if matrix[i][j] != matrix[j][i]:
+                return False
+    return True
+
+# Функция для проверки наличия корректных значений в матрице
+def is_valid_values(matrix):
+    for row in matrix:
+        for value in row:
+            if not (0 <= value <= 100):
+                return False
+    return True
+
+# Функция для проверки наличия нулей на диагонали матрицы
+def has_zeros_on_diagonal(matrix):
+    for i in range(len(matrix)):
+        if matrix[i][i] != 0:
+            return False
+    return True

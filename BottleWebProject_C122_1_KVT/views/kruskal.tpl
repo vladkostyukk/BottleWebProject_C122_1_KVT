@@ -82,7 +82,7 @@
            <img src="\static\images\graph2.png" alt="Graph2">
            <p class="image-caption"><em>Рисунок 4 - Кратчайший остов графа</em></p>
         </div>
-        <p>Таким образом, мы разобрали работу алгоритма Краскала и с его помощью нашли кратчайший остов графа. Для большей наглядности воспользуйтесь нашим <a href="#" id="calculator-link">калькулятором</a>!</p>
+        <p onclick="selectTabTCalculate()">Таким образом, мы разобрали работу алгоритма Краскала и с его помощью нашли кратчайший остов графа. Для большей наглядности воспользуйтесь нашим <a href="#" id="calculator-link">калькулятором</a>!</p>
         </article>
       <article id="calculator" class="tablist__panel" role="tabpanel">
             <form action="/home" method="post">

@@ -20,10 +20,10 @@
     <RootNamespace>BottleWebProject_C122_1_KVT</RootNamespace>
     <InterpreterId>MSBuild|env1|$(MSBuildProjectFullPath)</InterpreterId>
     <InterpreterId>MSBuild|env2|$(MSBuildProjectFullPath)</InterpreterId>
-    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|env1|$(MSBuildProjectFullPath)</InterpreterId>
     <TestFramework>unittest</TestFramework>
     <UnitTestPattern>test*.py</UnitTestPattern>
-    <UnitTestRootDirectory>.\static\tests</UnitTestRootDirectory>
+    <UnitTestRootDirectory>.</UnitTestRootDirectory>
     <WebBrowserPort>
     </WebBrowserPort>
   </PropertyGroup>
@@ -42,12 +42,13 @@
     </Compile>
     <Compile Include="kruskal.py">
       <SubType>Code</SubType>
+      <Publish>True</Publish>
     </Compile>
     <Compile Include="bfs.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="routes.py" />
-    <Compile Include="static\tests\test_bfs.py">
+    <Compile Include="test_kruskal.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -57,7 +58,6 @@
     <Folder Include="static\dfs\" />
     <Folder Include="static\fonts\" />
     <Folder Include="static\images\" />
-    <Folder Include="static\tests\" />
     <Folder Include="static\scripts\" />
     <Folder Include="views\" />
   </ItemGroup>
@@ -101,7 +101,6 @@
     <Content Include="static\scripts\modernizr-2.6.2.js" />
     <Content Include="static\scripts\respond.js" />
     <Content Include="static\scripts\respond.min.js" />
-    <Content Include="static\scripts\switch_calc.js" />
     <Content Include="static\scripts\_references.js" />
     <Content Include="views\bfs.tpl">
       <SubType>Code</SubType>
