@@ -9,12 +9,12 @@
 
   <div class="tablist">
     <input class="tablist__radio" type="radio" id="tab-1" name="tab" checked>
-    <label class="tablist__label" for="tab-1" role="tab" aria-setsize="3" aria-posinset="1">Теоретический материал</label>
+    <label class="tablist__label" for="tab-1">Теоретический материал</label>
     <input class="tablist__radio" type="radio" id="tab-2" name="tab">
-    <label class="tablist__label" for="tab-2" role="tab" aria-setsize="3" aria-posinset="2">Калькулятор</label>
+    <label class="tablist__label" for="tab-2">Калькулятор</label>
 
     <div class="tablist__panels">
-      <article class="tablist__panel tablist__panel--active" role="tabpanel">
+      <article class="tablist__panel tablist__panel--active">
         <div class="center-box">
        <p><strong>Алгоритм Краскала</strong> – эффективный алгоритм построения кратчайшего остова взвешанного связного неориентированного графа, заключающийся в упорядочении рёбер графа.</p>
      </div>
@@ -23,7 +23,7 @@
         <p><u>Задача:</u></p>
         <p>Дан неориентированный граф (рисунок 1). Заданы номера вершин (в примере это номера 0...8).</p>
         <div class="image-center">
-            <img src="\static\images\graph1.png" alt="Graph1">
+            <img src="/static/images/graph1.png" alt="Graph1">
             <p class="image-caption"><em>Рисунок 1 - Взвешанный связной неориентированный граф</em></p>
         </div>
         <div class="text-image-container">
@@ -52,7 +52,7 @@
         <p><u>Решение:</u></p>
         <p>В начале выполнения алгоритма каждая вершина считается отдельным множеством. Формируется список множеств:</p>
          <div class="image-center">
-            <img src="\static\images\list_sets.png" alt="List of sets">
+            <img src="/static/images/list_sets.png" alt="List of sets">
             <p class="image-caption"><em>Рисунок 3 - Список множеств вершин</em></p>
         </div>
         <p>Затем составляется список ребер, который упорядочивается в порядке возрастания их веса:</p>
@@ -79,40 +79,42 @@
         <p></p>
         <p>Далее в соответствии с таблицей 2 строим кратчайший остов графа весом <em>L=28</em> (остов выделен зелёным цветом):</p>
         <div class="image-center">
-           <img src="\static\images\graph2.png" alt="Graph2">
+           <img src="/static/images/graph2.png" alt="Graph2">
            <p class="image-caption"><em>Рисунок 4 - Кратчайший остов графа</em></p>
         </div>
         <p onclick="selectTabTCalculate()">Таким образом, мы разобрали работу алгоритма Краскала и с его помощью нашли кратчайший остов графа. Для большей наглядности воспользуйтесь нашим <a href="#" id="calculator-link">калькулятором</a>!</p>
         </article>
-      <article id="calculator" class="tablist__panel" role="tabpanel">
+      <article id="calculator" class="tablist__panel">
             <form action="/home" method="post">
-            <p>Количество вершин графа:</p>
-            <p>
-                <input type="number" id="vertices-input" name="vertexCount" min="3" max="10" value="3" onchange="generateMatrixKruskal()" class="rounded-input" oninput="this.value = Math.min(Math.max(this.value, 3), 10)">
-            </p>
-            <p>Матрица весов рёбер:</p>
-            <div id="matrix_kruskal"></div>
-            <p></p>
-            <p>
+                <p>Количество вершин графа:</p>
+                <p>
+                    <input type="number" id="vertices-input" name="vertexCount" min="3" max="10" value="3" onchange="generateMatrixKruskal()" class="rounded-input" oninput="this.value = Math.min(Math.max(this.value, 3), 10)">
+                </p>
+                <p>Матрица весов рёбер:</p>
+                <div id="matrix_kruskal"></div>
+                <p></p>
                 <button type="button" class="floating-button-Kruskal" onclick="buildGraphKruskal()">Построить</button>
                 <button type="button" class="floating-button-Kruskal" onclick="generationMatrixKruskal()">Сгенерировать</button>
                 <label class="input-file-kruskal">
-	                <input type="file" name="file" accept=".txt" onchange="handleFileKruskal(event)">		
-	                <span>Из файла</span>
+                    <input type="file" name="file" accept=".txt" onchange="handleFileKruskal(event)">		
+                    <span>Из файла</span>
                 </label>
-                <center><div id="error-message" style="display: none; color: red; font-weight: bold; font-size: 20px;"></div></center>
-                <div id="graphButtons" style="display: none;">
-                    <center><div id="network" style="width: 800px; height: 600px; border: 3px solid #2162a4; margin-top: 15px;"></div></center>
-                    <center><button type="button" class="floating-button-Kruskal" style="width: 250px;" onclick="saveGraphKruskal()">Сохранить матрицу графа</button>
-                    <button type="button" class="floating-button-Kruskal" style="width: 250px;" onclick="sendMatrixDataKruskal()">Найти кратчайший остов</button></center>
+                <div id="error-message" class="style-error-message"></div>
+                <div id="graphButtons" class="style_graph_buttons">
+                    <div id="network" class="style_graph"></div>
+                    <div class="style_center_button">
+                        <button type="button" class="floating-button-Kruskal" style="width: 250px;" onclick="saveGraphKruskal()">Сохранить матрицу графа</button>
+                        <button type="button" class="floating-button-Kruskal" style="width: 250px;" onclick="sendMatrixDataKruskal()">Найти кратчайший остов</button>
+                    </div>
                 </div>
-                <center><div id="connect-message" style="display: none; color: red; font-weight: bold; font-size: 20px;"></div></center>
-                <div id="graphminostov" style="display: none;">
-                    <center><div id="weight-message" style="color: black; font-weight: bold; font-size: 20px;"></div></center>
-                    <center><div id="network2" style="width: 800px; height: 600px; border: 3px solid #2162a4; margin-top: 15px;"></div></center>
-                    <center><button type="button" class="floating-button-Kruskal" style="width: 280px;" onclick="saveGraphKruskalMin()">Сохранить матрицу остова</button></center>
+                <div id="connect-message" class="style-connect-message"></div>
+                <div id="graphminostov" class="style_graph_buttons">
+                    <div id="weight-message" class="style-weight-message"></div>
+                    <div id="network2" class="style_graph"></div>
+                    <div class="style_center_button">
+                        <button type="button" class="floating-button-Kruskal" style="width: 280px;" onclick="saveGraphKruskalMin()">Сохранить матрицу остова</button>
+                    </div>
                 </div>
-            </p>
             </form>
         </article>
         </div>

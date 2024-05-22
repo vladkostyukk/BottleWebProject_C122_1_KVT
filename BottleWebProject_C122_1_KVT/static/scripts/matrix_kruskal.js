@@ -94,7 +94,6 @@ function buildGraphKruskal() {
         layout: {  // Опции компоновки вершин
             improvedLayout: true,  // Улучшенная компоновка вершин
             randomSeed: 2,  // Задание случайного начального состояния для генерации графа
-            clusterThreshold: 150,  // Порог для объединения вершин в кластеры
             hierarchical: { enabled: false }  // Отключение иерархической компоновки
         },
         physics: {  // Опции физики графа
@@ -505,7 +504,6 @@ function buildGraphKruskalMin(mstMatrix, vertexCount) {
         layout: {
             improvedLayout: true,
             randomSeed: 2, // Фиксируем начальное положение узлов
-            clusterThreshold: 150,
             hierarchical: { enabled: false }
         },
         physics: {

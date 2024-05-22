@@ -73,7 +73,6 @@
     <script src="/static/scripts/respond.js"></script>
     <script src="/static/scripts/bfs.js"></script>
     <script src="/static/scripts/matrix_kruskal.js"></script>
-    <script src="/static/scripts/create_graph_kruskal.js"></script>
 
 </body>
 </html>

@@ -14,7 +14,7 @@ def my_form():
         return validation_result
 
     mst_matrix, mst_weight = kruskal_algorithm(matrix, vertex_count)
-    return {'mst_matrix': mst_matrix, 'mst_weight': mst_weight}
+    return {'mst_matrix': mst_matrix, 'mst_weight': mst_weight, 'validation_result': validation_result}
 
 
 # Алгоритм Краскала для построения минимального остова

@@ -630,6 +630,46 @@ img {
     font-size: 0.9em;
 }
 
+.style-error-message {
+    display: none;
+    color: red;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+
+.style_graph_buttons {
+    display: none;
+}
+
+.style_graph {
+    width: 800px;
+    height: 600px;
+    border: 3px solid #2162a4;
+    margin-top: 15px;
+    text-align: center;
+    margin-left: 50px;
+}
+
+.style-connect-message {
+    display: none;
+    color: red;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+
+.style-weight-message {
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+
+.style_center_button {
+    text-align: center;
+}
+
 .floating-button-Kruskal {
     text-decoration: none;
     display: inline-block;
