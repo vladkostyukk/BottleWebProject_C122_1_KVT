@@ -30,11 +30,11 @@
                 <h1 class="dfs-card-title">Попробуйте сами!</h1>
                 <p class="dfs-card-text">Количество вершин:</p>
                 <div>
-                    <input type="number" min=4 max=10 value=4 name="count-vertex" id="dfs-count-vertex" class="form-control"  onkeypress="return false" />
+                    <input type="number" min=4 max=10 value=4 name="count-vertex" id="dfs-count-vertex" class="form-control"  onkeypress="return false" >
                 </div>
                 <p class="dfs-card-text">Введите начальную вершину:</p>
                 <div>
-                    <input type="number" min=0 max=10 value=0 name="start-vertex" class="form-control" onkeypress="return false" />
+                    <input type="number" min=0 max=10 value=0 name="start-vertex" class="form-control" onkeypress="return false" >
                 </div>
                 <p class="dfs-card-text">Матрица смежности:</p>
                 <div id="dfs-matrix-table" name="matrix-table">
