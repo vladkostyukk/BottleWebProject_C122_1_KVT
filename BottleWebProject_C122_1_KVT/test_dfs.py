@@ -1,6 +1,4 @@
 import unittest
-from bottle import get, post, request, response
-from json import dumps
 from dfs import make_symmetric, dfs_spanning_tree, dfs_read_matrix
 
 class Test_dfs(unittest.TestCase):
