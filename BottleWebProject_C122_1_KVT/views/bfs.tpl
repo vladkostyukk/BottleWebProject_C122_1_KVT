@@ -1,7 +1,7 @@
 % rebase('layout.tpl', title=title, year=year)
 
 <!-- Задний фон -->
-<div class="bfs-background"</div>
+<div class="bfs-background"></div>
 
 <!-- Блок теории -->
 <div class="bfs-block-theory">
@@ -35,7 +35,7 @@
     <h3>Матрица смежности:</h3>
 
     <!-- Кнопки для генерации случайной матрицы или загрузки из файла -->
-    <div style="display: flex; align-items: left;">
+    <div style="display: flex;">
         <a class="floating-button" onclick="generateRandomMatrix()" style="width: 170px;">Сгенерировать</a>
 
         <div>
