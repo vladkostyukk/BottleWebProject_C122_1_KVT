@@ -41,12 +41,18 @@
     </Compile>
     <Compile Include="kruskal.py">
       <SubType>Code</SubType>
+      <Publish>True</Publish>
     </Compile>
     <Compile Include="bfs.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="routes.py" />
-    <Compile Include="test_bfs.py" />
+    <Compile Include="test_kruskal.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="test_bfs.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="test_dfs.py">
       <SubType>Code</SubType>
     </Compile>
@@ -100,7 +106,6 @@
     <Content Include="static\scripts\modernizr-2.6.2.js" />
     <Content Include="static\scripts\respond.js" />
     <Content Include="static\scripts\respond.min.js" />
-    <Content Include="static\scripts\switch_calc.js" />
     <Content Include="static\scripts\_references.js" />
     <Content Include="views\bfs.tpl">
       <SubType>Code</SubType>

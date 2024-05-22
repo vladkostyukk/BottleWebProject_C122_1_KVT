@@ -78,7 +78,6 @@
     <script src="/static/scripts/respond.js"></script>
     <script src="/static/scripts/bfs.js"></script>
     <script src="/static/scripts/matrix_kruskal.js"></script>
-    <script src="/static/scripts/switch_calc.js"></script>
 
 </body>
 </html>
